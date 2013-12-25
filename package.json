@@ -1,0 +1,46 @@
+{
+    "name" : "luster",
+    "version" : "0.1.7",
+    "description" : "Node.js cluster wrapper",
+    "main" : "./lib/luster.js",
+    "bin" : {
+        "luster" : "./bin/luster.js"
+    },
+    "scripts" : {
+        "test" : "./node_modules/.bin/jshint --config ./.jshintrc ./lib ./test && ./node_modules/.bin/jscs ./lib ./test"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/nodules/luster.git"
+    },
+    "keywords" : [
+        "cluster",
+        "luster",
+        "ipc"
+    ],
+    "author" : "Phillip Kovalev <twilightfeel@gmail.com> (https://github.com/kaero)",
+    "maintainers" : [
+        "Phillip Kovalev <twilightfeel@gmail.com> (https://github.com/kaero)"
+    ],
+    "contributors" : [
+        "Vladimir Varankin <nek.narqo@gmail.com> (https://github.com/narqo)"
+    ],
+    "licenses" : [
+        {
+            "type" : "MIT",
+            "url" : "http://github.com/nodules/luster/raw/master/LICENSE"
+        }
+    ],
+    "readmeFilename" : "README.md",
+    "dependencies" : {
+        "objex" : "0.2.x",
+        "terror" : "0.3.x"
+    },
+    "devDependencies" : {
+        "jshint" : "2.1.x",
+        "jscs" : ">=1.0.5"
+    },
+    "engines" : {
+        "node" : ">=0.10"
+    }
+}

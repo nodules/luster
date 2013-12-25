@@ -1,0 +1,10 @@
+{
+    "name": "luster-example-simple-server",
+    "version": "0.0.0",
+    "scripts": {
+        "start": "luster"
+    },
+    "bundlesDependencies": [
+        "luster"
+    ]
+}

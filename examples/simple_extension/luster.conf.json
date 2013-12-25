@@ -1,0 +1,13 @@
+{
+    "app": "worker.js",
+    "workers" : 2,
+    "server" : {
+        "port" : 10080
+    },
+    "extensions" : {
+        "luster-simple" : {
+            "param1" : 1,
+            "param2" : "World"
+        }
+    }
+}
