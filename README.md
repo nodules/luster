@@ -88,8 +88,8 @@ module.exports = {
     // extensions to load
     // each key in the "extensions" hash is a npm module name
     extensions : {
-        // luster-log-files extension example
-        "luster-log-files" : {
+        // luster-log-file extension example
+        "luster-log-file" : {
             stdout : "/var/log/luster/app.stdout.log",
             stderr : "/var/log/luster/app.stderr.log"
         },
