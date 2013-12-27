@@ -5,8 +5,9 @@ domain.on('error', function(error) {
     var fs = require('fs'),
         os = require('os'),
         path = require('path'),
+        tmpDir = os.tmpdir || os.tmpDir,
         dumpFilePath = path.resolve(
-            os.tmpdir(),
+            tmpDir(),
             'luster-dump-' + process.pid + '-' +
                 (new Date()).toISOString().replace(/[^\dTZ]/g, '-'));
 
