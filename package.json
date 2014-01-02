@@ -1,6 +1,6 @@
 {
     "name" : "luster",
-    "version" : "0.1.7",
+    "version" : "0.2.0-pre1",
     "description" : "Node.js cluster wrapper",
     "main" : "./lib/luster.js",
     "bin" : {
@@ -41,6 +41,6 @@
         "jscs" : ">=1.0.5"
     },
     "engines" : {
-        "node" : ">=0.10"
+        "node" : ">=0.8"
     }
 }
