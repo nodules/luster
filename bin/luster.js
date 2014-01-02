@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-var domain = require('domain').create();
+var legacy = require('../lib/legacy'),
+    domain = require('domain').create();
 
 domain.on('error', function(error) {
     var fs = require('fs'),
-        os = require('os'),
         path = require('path'),
         dumpFilePath = path.resolve(
-            (os.tmpdir || os.tmpDir)(),
+            legacy.tmpdir(),
             'luster-dump-' + process.pid + '-' +
                 (new Date()).toISOString().replace(/[^\dTZ]/g, '-'));
 
