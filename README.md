@@ -96,8 +96,8 @@ module.exports = {
 
         // luster-guard extension example
         "luster-guard" : {
-            include : /\.js$/g,
-            exclude : /node_modules/g
+            include: [ '**/*.js' ],
+            exclude: [ '**/node_modules/**' ]
         }
     },
 
