@@ -1,3 +1,21 @@
+luster (0.2.3); urgency=low
+
+  * Emit Master#shutdown if all workers are dead.
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Mon, 03 Feb 2014 17:08:29 +0400
+
+luster (0.2.2); urgency=low
+
+  * Option "control.allowedSequentialDeaths" has been revived
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Mon, 03 Feb 2014 17:07:51 +0400
+
+luster (0.2.1); urgency=low
+
+  * Fix master failure on workers stopping
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Mon, 03 Feb 2014 17:06:49 +0400
+
 luster (0.2.0); urgency=low
 
   * Add legacy support for Node.js 0.8
