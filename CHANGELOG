@@ -1,3 +1,9 @@
+luster (0.2.4); urgency=low
+
+  * Fix dead mark setup condition
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Wed, 12 Feb 2014 16:45:57 +0400
+
 luster (0.2.3); urgency=low
 
   * Emit Master#shutdown if all workers are dead.
