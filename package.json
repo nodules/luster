@@ -34,7 +34,7 @@
     "readmeFilename" : "README.md",
     "dependencies" : {
         "objex" : "0.2.x",
-        "terror" : "0.3.x"
+        "terror" : "0.4.x"
     },
     "devDependencies" : {
         "jshint" : "2.1.x",
