@@ -33,7 +33,7 @@
     ],
     "readmeFilename" : "README.md",
     "dependencies" : {
-        "objex" : "0.2.x",
+        "objex" : "0.3.x",
         "terror" : "0.4.x"
     },
     "devDependencies" : {
