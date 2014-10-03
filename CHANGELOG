@@ -1,3 +1,18 @@
+luster (0.2.5); urgency=low
+
+  * Drop useless domain wrapper around luster configuration and launch
+  * Update terror to 0.4.x
+  * Update objex to 0.3.x
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Fri, 03 Oct 2014 20:39:29 +0300
+
+luster (0.2.5); urgency=low
+
+  * Fix issue which appears if "port" is not defined in the luster config
+  * Drop domain wrapper around worker code requirement
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Wed, 1 Mar 2014 00:00:00 +0400
+
 luster (0.2.4); urgency=low
 
   * Fix dead mark setup condition
