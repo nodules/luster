@@ -4,10 +4,19 @@
     "server" : {
         "port" : 10080
     },
+    "control" : {
+        "exitThreshold" : 10000,
+        "allowedSequentialDeaths" : 2
+    },
+    "extensionsLoadTimeout": 6000,
     "extensions" : {
         "luster-simple" : {
             "param1" : 1,
             "param2" : "World"
+        },
+        "luster-async" : {
+            "param1" : 2,
+            "param2" : "Hello"
         }
     }
 }
