@@ -1,4 +1,10 @@
-luster (0.2.5); urgency=low
+luster (0.3.0); urgency=low
+
+  * Add support for asynchronous extensions initialization
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Fri, 17 Oct 2014 19:32:15 +0300
+
+luster (0.2.6); urgency=low
 
   * Drop useless domain wrapper around luster configuration and launch
   * Update terror to 0.4.x
