@@ -107,6 +107,9 @@ module.exports = {
     // must be declared here:
     extensionsPath : "/usr/local/luster-extensions",
 
+    // max time to wait for extensions initialization
+    extensionsLoadTimeout : 10000,
+
     // if your app or used extensions extensively use luster
     // internal events then you can tweak internal event emitters
     // listeners number limit using following option.
@@ -127,8 +130,7 @@ which will be called duering master and worker configuration.
 
 > @todo
 
-`my-extension.js`
-
+Synchronous extension initialization:
 ```javascript
 module.exports = {
     configure : function(config, clusterProcess) {
@@ -144,3 +146,40 @@ module.exports = {
     }
 }
 ```
+
+Asynchronous extension initalization:
+```javascript
+module.exports = {
+    initializeOnMaster : function(master, done) {
+        // emulate async operation
+        setTimeout(function() {
+            // do something
+            done();
+        }, 500);
+    },
+
+    initializeOnWorker : function(worker, done) {
+        // emulate async operation
+        setTimeout(function() {
+            // do something
+            done();
+        }, 300);
+    },
+
+    configure : function(config, clusterProcess, done) {
+        // has `get` method:
+        // var someProp = config.get('some.property.path', defaultValue);
+        this.config = config;
+
+        if (clusterProcess.isMaster) {
+            this.initializeOnMaster(clusterProcess, done);
+        } else {
+            this.initializeOnWorker(clusterProcess, done);
+        }
+    }
+}
+```
+
+To enable asynchronous initalization of an extension, `configure` function must be declared with 3 or more arguments,
+where 3-rd argument is callback, which must be called by extensions when initialization has been finished.
+Callback accepts one optional argument: an error, if initalization failed.
