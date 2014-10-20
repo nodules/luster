@@ -1,3 +1,9 @@
+luster (0.3.1); urgency=low
+
+  * Allow plugins to change master options using Master#setup()
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Mon, 20 Oct 2014 08:09:28 +0300
+
 luster (0.3.0); urgency=low
 
   * Add support for asynchronous extensions initialization
