@@ -7,7 +7,7 @@
         "luster" : "./bin/luster.js"
     },
     "scripts" : {
-        "test" : "./node_modules/.bin/jshint --config ./.jshintrc ./lib ./test && ./node_modules/.bin/jscs ./lib ./test"
+        "test" : "./node_modules/.bin/jshint --config ./.jshintrc ./lib && ./node_modules/.bin/jscs ./lib"
     },
     "repository" : {
         "type" : "git",
@@ -39,7 +39,7 @@
     },
     "devDependencies" : {
         "jshint" : "2.1.x",
-        "jscs" : ">=1.0.5"
+        "jscs" : "1.4.x"
     },
     "engines" : {
         "node" : ">=0.8"
