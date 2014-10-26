@@ -1,3 +1,23 @@
+luster (0.4.1); urgency=high
+
+  * Fix resolution of relative paths in the options "extensionsPath"
+    (by ErBlack, https://github.com/ErBlack)
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Sun, 26 Oct 2014 05:15:58 +0300
+
+luster (0.4.0); urgency=low
+
+  * fix exception in the Master if configuration doesn't include any
+    extensions (bug was introduced in 0.3.0)
+  * add missing dependency "extend" (bug was introduced in 0.3.1)
+  * add method ClusterProcess#hasRegisteredRemoteCommand(name)
+  * add event WorkerWrapper#initialized (transmitted from Worker#initalized
+    via IPC)
+  * emit the event WorkerWrapper#ready only after Worker#initialized event of
+    served worker process
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Wed, 22 Oct 2014 06:40:00 +0300
+
 luster (0.3.1); urgency=low
 
   * Allow plugins to change master options using Master#setup()
