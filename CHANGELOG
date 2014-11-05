@@ -1,3 +1,10 @@
+luster (0.5.0); urgency=high
+
+  * delay sending message to worker is ready (if not) in Master#remoteCallToAll()
+  * emit "ready" as worker initalization done for listening workers too
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Wed, 05 Nov 2014 16:16:56 +0300
+
 luster (0.4.1); urgency=high
 
   * Fix resolution of relative paths in the options "extensionsPath"
