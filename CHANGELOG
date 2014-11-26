@@ -1,3 +1,10 @@
+luster (0.5.2); urgency=high
+
+  * fix master failure if some worker send "initialized" event before all
+    workers forked.
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Wed, 26 Nov 2014 18:06:22 +0300
+
 luster (0.5.1); urgency=low
 
   * allow to run worker without master process
