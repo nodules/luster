@@ -1,3 +1,9 @@
+luster (0.5.3); urgency=high
+
+  * load worker codebase only when foreign properties received.
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Wed, 10 Dec 2014 14:35:05 +0300
+
 luster (0.5.2); urgency=high
 
   * fix master failure if some worker send "initialized" event before all
