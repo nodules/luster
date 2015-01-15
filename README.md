@@ -1,4 +1,8 @@
-# luster
+Luster [![NPM version][npm-image]][npm-link]
+======
+
+[![Dependency status][deps-image]][deps-link]
+[![Development Dependency status][devdeps-image]][devdeps-link]
 
 ## Core features
 
@@ -183,3 +187,10 @@ module.exports = {
 To enable asynchronous initalization of an extension, `configure` function must be declared with 3 or more arguments,
 where 3-rd argument is callback, which must be called by extensions when initialization has been finished.
 Callback accepts one optional argument: an error, if initalization failed.
+
+[npm-image]: https://img.shields.io/npm/v/luster.svg?style=flat
+[npm-link]: https://npmjs.org/package/luster
+[deps-image]: https://img.shields.io/david/nodules/luster.svg?style=flat
+[deps-link]: https://david-dm.org/nodules/luster
+[devdeps-image]: https://img.shields.io/david/dev/nodules/luster.svg?style=flat
+[devdeps-link]: https://david-dm.org/nodules/luster#info=devDependencies
