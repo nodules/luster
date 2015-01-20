@@ -39,6 +39,24 @@ Read configuration manual to know more about luster features.
 
 ## Configuration
 
+### How luster tries to resolve a path to configuration file
+
+Following example written in plain JavaScript, not JSON, so you can name it
+`luster.conf.js` to launch luster without options,
+or pass the configuration file path as the first argument to the script:
+
+```console
+$ ./node_modules/.bin/luster ./configs/my_luster_configuration.js
+```
+
+Internally, luster tries to call the `require()` in the following way:
+
+```javascript
+require(path.resolve(process.cwd(), process.argv[2] || './luster.conf'));
+```
+
+### Annotated example of configuration
+
 ```javascript
 module.exports = {
     // required, absolute or relative path to configuration file
@@ -76,6 +94,10 @@ module.exports = {
         // if you use unix sockets with groups of the workers,
         // then path must contain '*' char, which will be replaced
         // with group number
+        //
+        // worker can get port number to listen from the environment variable
+        // `port`, for example:
+        // > server.listen(process.env.port)
         port : 8080,
 
         // number of workers' groups; each group will
