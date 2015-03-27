@@ -1,6 +1,6 @@
 {
     "name" : "luster",
-    "version" : "0.5.3",
+    "version" : "0.5.4",
     "description" : "Node.js cluster wrapper",
     "main" : "./lib/luster.js",
     "bin" : {

@@ -1,3 +1,9 @@
+luster (0.5.4); urgency=high
+
+  * pass worker pid to master (by https://github.com/corpix)
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Fri, 27 Mar 2015 19:31:20 +0300
+
 luster (0.5.3); urgency=high
 
   * load worker codebase only when foreign properties received.
