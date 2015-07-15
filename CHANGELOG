@@ -1,3 +1,9 @@
+luster (0.5.6); urgency=high
+
+  * update dependencies
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Wed, 15 Jul 2015 13:47:06 +0300
+
 luster (0.5.5); urgency=high
 
   * don't count worker restart as "death"
