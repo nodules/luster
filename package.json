@@ -33,13 +33,13 @@
     ],
     "readmeFilename" : "README.md",
     "dependencies" : {
-        "objex" : "0.3.x",
+        "objex" : "^0.4.0",
         "terror" : "^1.0.0",
-        "extend": "2.0.0"
+        "extend": "^3.0.0"
     },
     "devDependencies" : {
-        "jshint" : "2.1.x",
-        "jscs" : "1.4.x"
+        "jshint" : "^2.1.0",
+        "jscs" : "^1.13.0"
     },
     "engines" : {
         "node" : ">=0.8"
