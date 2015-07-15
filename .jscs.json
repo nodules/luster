@@ -15,13 +15,11 @@
         "switch",
         "return"
     ],
-    "disallowLeftStickedOperators": [
-        "?",
+    "requireSpaceBeforeBinaryOperators": [
         "+",
         "-",
         "/",
         "*",
-        ":",
         "=",
         "==",
         "===",
@@ -32,13 +30,10 @@
         "<",
         "<="
     ],
-    "disallowRightStickedOperators": [
-        "!",
-        "?",
+    "requireSpaceAfterBinaryOperators": [
         "+",
         "/",
         "*",
-        ":",
         "=",
         "==",
         "===",
@@ -49,7 +44,11 @@
         "<",
         "<="
     ],
-    "requireLeftStickedOperators": [
+    "requireSpacesInConditionalExpression": true,
+    "requireSpaceAfterPrefixUnaryOperators": [
+        "!"
+    ],
+    "disallowSpaceBeforeBinaryOperators": [
         ","
     ],
     "disallowKeywords": [
