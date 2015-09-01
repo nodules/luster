@@ -1,3 +1,10 @@
+luster (0.5.7); urgency=high
+
+  * prevent workes from respawning on WorkerWrapper#stop() call,
+    btw fixes Master#shutdown().
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Tue, 01 Sep 2015 17:37:05 +0300
+
 luster (0.5.6); urgency=high
 
   * update dependencies
