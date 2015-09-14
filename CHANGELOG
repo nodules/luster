@@ -1,3 +1,9 @@
+luster (0.5.8); urgency=high
+
+  * fix WorkerWrapper#restart() (by https://github.com/an9eldust)
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Mon, 14 Sep 2015 12:53:16 +0300
+
 luster (0.5.7); urgency=high
 
   * prevent workes from respawning on WorkerWrapper#stop() call,
