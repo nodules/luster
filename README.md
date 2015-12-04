@@ -92,7 +92,7 @@ module.exports = {
         // when you call require('luster').ready inside of it
         // notice that it's only affect startup/restart logic
         // worker will start handling requests right after you call 'listen' inside of it
-        triggerReadyStateManually : true
+        triggerReadyStateManually : false
     },
 
     // use "server" group if you want to use web workers
