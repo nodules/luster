@@ -1,3 +1,11 @@
+luster (0.6.0); urgency=high
+
+  * allow workers to trigger "ready" state manually (by https://github.com/mutantcornholio)
+  * fix custom workers events flow (Worker -> RPC -> WorkerWrapper -> Master)
+  * better debug output formatting
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Mon, 21 Dec 2015 17:10:25 +0300
+
 luster (0.5.8); urgency=high
 
   * fix WorkerWrapper#restart() (by https://github.com/an9eldust)
