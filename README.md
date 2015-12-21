@@ -84,7 +84,15 @@ module.exports = {
         // max allowed value of `sequentialDeaths` counter
         // for each worker; on exceeding this limit worker will
         // be marked as `dead` and no more automatic restarts will follow.
-        allowedSequentialDeaths : 10
+        allowedSequentialDeaths : 10,
+
+        // if falsy, worker is considered ready after 'online' event
+        // it happens between forking worker and executing it
+        // if truly, worker is considered ready
+        // when you call require('luster').ready inside of it
+        // notice that it's only affect startup/restart logic
+        // worker will start handling requests right after you call 'listen' inside of it
+        triggerReadyStateManually : false
     },
 
     // use "server" group if you want to use web workers
@@ -128,8 +136,8 @@ module.exports = {
     },
 
     // if extensions' modules can't be resolved as related to
-    // luster module or worker path, then absolute path 
-    // to the directory, which contains extensions modules 
+    // luster module or worker path, then absolute path
+    // to the directory, which contains extensions modules
     // must be declared here:
     extensionsPath : "/usr/local/luster-extensions",
 
