@@ -1,0 +1,18 @@
+{
+    "app": "worker.js",
+
+    "workers" : 2,
+
+    "control" : {
+        "forkTimeout" : 1000,
+        "stopTimeout" : 1000,
+        "exitThreshold" : 3000,
+        "allowedSequentialDeaths" : 3,
+        "triggerReadyStateManually": true
+    },
+
+    "server" : {
+        "port" : 10080,
+        "groups" : 3
+    }
+}
