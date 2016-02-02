@@ -1,3 +1,10 @@
+luster (0.6.1); urgency=low
+
+  * fix error message "LusterPortError: Can not unlink unix socket "undefined"
+    https://github.com/nodules/luster/pull/32
+
+ -- Vladimir Varankin <nek.narqo@gmail.com>  Tue, 02 Feb 2016 12:50:15 +0300
+
 luster (0.6.0); urgency=high
 
   * allow workers to trigger "ready" state manually (by https://github.com/mutantcornholio)
