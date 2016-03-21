@@ -116,6 +116,9 @@ module.exports = {
     debug : {
         // debug port for first worker; each following will
         // use previous worker port + 1
+        //
+        // deprecated: this option doesn't work with Node.js 0.12+
+        // and might be removed in future major versions
         port : 5010
     },
 
