@@ -123,16 +123,14 @@ describe('Configurable', function() {
                 assert.strictEqual(configurable.config.server, true);
             });
 
-            // https://github.com/nodules/luster/issues/37
-            it.skip('should throw when trying to set inner property to a scalar property', function() {
+            it('should throw when trying to set inner property to a scalar property', function() {
                 process.env.LUSTER_CONF = 'foo.bar=true';
 
                 assert.throws(function() { configurable.configure(config); },
                     'LusterConfigurationError: Property "" is exist and is not an object');
             });
 
-            // https://github.com/nodules/luster/issues/37
-            it.skip('should do second-level nested property override', function() {
+            it('should do second-level nested property override', function() {
                 process.env.LUSTER_CONF = 'server.port=8080';
 
                 configurable.configure(config);
@@ -140,8 +138,7 @@ describe('Configurable', function() {
                 assert.strictEqual(configurable.config.server.port, 8080);
             });
 
-            // https://github.com/nodules/luster/issues/37
-            it.skip('should do deep nested property override', function() {
+            it('should do deep nested property override', function() {
                 process.env.LUSTER_CONF = 'properties.foo.bar.baz=true';
 
                 configurable.configure(config);
