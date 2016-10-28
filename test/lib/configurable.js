@@ -54,7 +54,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.strictEqual(configurable.config.workers, 1);
+                assert.strictEqual(configurable.config.get('workers'), 1);
             });
 
             it('should do nothing if overriding is explicitly turned off', function() {
@@ -62,7 +62,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config, false);
 
-                assert.strictEqual(configurable.config.workers, 10);
+                assert.strictEqual(configurable.config.get('workers'), 10);
             });
 
             it('should override to undefined value via empty string', function() {
@@ -70,7 +70,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.isUndefined(configurable.config.foo);
+                assert.isUndefined(configurable.config.get('foo'));
             });
 
             it('should do nothing when only propname is provided', function() {
@@ -78,7 +78,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.strictEqual(configurable.config.foo, true);
+                assert.strictEqual(configurable.config.get('foo'), true);
             });
 
             it('should emit error when trying to override non-string property with a string', function() {
@@ -95,7 +95,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.strictEqual(configurable.config.foo, 'baz;');
+                assert.strictEqual(configurable.config.get('foo'), 'baz;');
             });
 
             it('should respect equality sign in quoted property value', function() {
@@ -103,7 +103,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.strictEqual(configurable.config.foo, 'baz=bar');
+                assert.strictEqual(configurable.config.get('foo'), 'baz=bar');
             });
 
             it('should parse json from propval', function() {
@@ -111,8 +111,8 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.strictEqual(configurable.config.properties.foo, true);
-                assert.strictEqual(configurable.config.properties.baz, 'bar');
+                assert.strictEqual(configurable.config.get('properties.foo'), true);
+                assert.strictEqual(configurable.config.get('properties.baz'), 'bar');
             });
 
             it('should override complex property with a scalar value', function() {
@@ -120,7 +120,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.strictEqual(configurable.config.server, true);
+                assert.strictEqual(configurable.config.get('server'), true);
             });
 
             it('should throw when trying to set inner property to a scalar property', function() {
@@ -135,7 +135,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.strictEqual(configurable.config.server.port, 8080);
+                assert.strictEqual(configurable.config.get('server.port'), 8080);
             });
 
             it('should do deep nested property override', function() {
@@ -143,7 +143,7 @@ describe('Configurable', function() {
 
                 configurable.configure(config);
 
-                assert.strictEqual(configurable.config.properties.foo.bar.baz, true);
+                assert.strictEqual(configurable.config.get('properties.foo.bar.baz'), true);
             });
 
             describe('should override multiple properties at once', function() {
@@ -152,8 +152,8 @@ describe('Configurable', function() {
 
                     configurable.configure(config);
 
-                    assert.strictEqual(configurable.config.workers, 1);
-                    assert.strictEqual(configurable.config.foo, false);
+                    assert.strictEqual(configurable.config.get('workers'), 1);
+                    assert.strictEqual(configurable.config.get('foo'), false);
                 });
 
                 it('whitespaces should not matter', function() {
@@ -161,8 +161,8 @@ describe('Configurable', function() {
 
                     configurable.configure(config);
 
-                    assert.strictEqual(configurable.config.workers, 1);
-                    assert.strictEqual(configurable.config.foo, false);
+                    assert.strictEqual(configurable.config.get('workers'), 1);
+                    assert.strictEqual(configurable.config.get('foo'), false);
                 });
             });
         });
