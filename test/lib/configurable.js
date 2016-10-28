@@ -145,6 +145,26 @@ describe('Configurable', function() {
 
                 assert.strictEqual(configurable.config.properties.foo.bar.baz, true);
             });
+
+            describe('should override multiple properties at once', function() {
+                it('should respect semicolon separated values', function() {
+                    process.env.LUSTER_CONF = 'workers=1;foo=false';
+
+                    configurable.configure(config);
+
+                    assert.strictEqual(configurable.config.workers, 1);
+                    assert.strictEqual(configurable.config.foo, false);
+                });
+
+                it('whitespaces should not matter', function() {
+                    process.env.LUSTER_CONF = 'workers = 1; foo =false';
+
+                    configurable.configure(config);
+
+                    assert.strictEqual(configurable.config.workers, 1);
+                    assert.strictEqual(configurable.config.foo, false);
+                });
+            });
         });
     });
 
