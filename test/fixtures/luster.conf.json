@@ -1,0 +1,8 @@
+{
+    "app": "worker.js",
+    "workers": 10,
+    "server": {
+        "port": 10080
+    },
+    "foo": true
+}
