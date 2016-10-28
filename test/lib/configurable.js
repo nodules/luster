@@ -124,10 +124,10 @@ describe('Configurable', function() {
             });
 
             it('should throw when trying to set inner property to a scalar property', function() {
-                process.env.LUSTER_CONF = 'foo.bar=true';
+                process.env.LUSTER_CONF = 'baz.foo.bar=true';
 
                 assert.throws(function() { configurable.configure(config); },
-                    'LusterConfigurationError: Property "" is exist and is not an object');
+                    'LusterConfigurationError: Property "baz.foo" already exists and is not an object');
             });
 
             it('should do second-level nested property override', function() {

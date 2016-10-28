@@ -4,5 +4,8 @@
     "server": {
         "port": 10080
     },
-    "foo": true
+    "foo": true,
+    "baz": {
+        "foo": "bar"
+    }
 }
