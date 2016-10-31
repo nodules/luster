@@ -1,3 +1,16 @@
+luster (0.6.3); urgency=low
+
+  * Configurable: nested property override via LUSTER_CONF is broken
+    https://github.com/nodules/luster/pull/38
+
+ -- Vladimir Varankin <nek.narqo@gmail.com>  Mon Oct 31 15:05:39 2016 +0300
+
+luster (0.6.2); urgency=high
+
+  * add methods to fire events on all processes via RPC
+
+ -- Phillip Kovalev <twilightfeel@gmail.com>  Fri Feb 26 18:22:25 2016 +0300
+
 luster (0.6.1); urgency=low
 
   * fix error message "LusterPortError: Can not unlink unix socket "undefined"
