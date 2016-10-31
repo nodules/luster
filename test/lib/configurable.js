@@ -29,19 +29,21 @@ describe('Configurable', function() {
         });
 
         it('should emit "configured" event on configuration success', function() {
-            sandbox.spy(configurable, 'emit');
+            var spy = sandbox.spy();
 
+            configurable.on('configured', spy);
             configurable.configure(config);
 
-            assert.calledWith(configurable.emit, 'configured');
+            assert.calledOnce(spy);
         });
 
         it('should emit "error" event for malformed config', function() {
-            sandbox.spy(configurable, 'emit');
+            var spy = sandbox.spy();
 
+            configurable.on('error', spy);
             configurable.configure({});
 
-            assert.calledWith(configurable.emit, 'error');
+            assert.calledOnce(spy);
         });
 
         describe('configuring via environment variable', function() {
@@ -83,11 +85,12 @@ describe('Configurable', function() {
 
             it('should emit error when trying to override non-string property with a string', function() {
                 process.env.LUSTER_CONF = 'workers=some';
-                sandbox.spy(configurable, 'emit');
+                var spy = sandbox.spy();
 
+                configurable.on('error', spy);
                 configurable.configure(config);
 
-                assert.calledWith(configurable.emit, 'error');
+                assert.calledOnce(spy);
             });
 
             it('should respect semicolon in quoted property value', function() {
