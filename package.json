@@ -6,8 +6,10 @@
     "bin" : {
         "luster" : "./bin/luster.js"
     },
-    "scripts" : {
-        "test" : "./node_modules/.bin/jshint --config ./.jshintrc ./lib && ./node_modules/.bin/jscs ./lib"
+    "scripts": {
+        "lint": "./node_modules/.bin/jshint --config ./.jshintrc ./lib && ./node_modules/.bin/jscs ./lib",
+        "unit": "istanbul test _mocha -- --recursive test/",
+        "test": "npm run lint && npm run unit"
     },
     "repository" : {
         "type" : "git",
@@ -23,7 +25,8 @@
         "Phillip Kovalev <twilightfeel@gmail.com> (https://github.com/kaero)"
     ],
     "contributors" : [
-        "Vladimir Varankin <nek.narqo@gmail.com> (https://github.com/narqo)"
+        "Vladimir Varankin <nek.narqo@gmail.com> (https://github.com/narqo)",
+        "Alexey Rybakov <alexrybakov@yandex.ru> (https://github.com/flackus)"
     ],
     "licenses" : [
         {
@@ -38,8 +41,13 @@
         "extend": "^3.0.0"
     },
     "devDependencies" : {
+        "chai": "^3.5.0",
         "jshint" : "^2.1.0",
-        "jscs" : "^1.13.0"
+        "jscs" : "^1.13.0",
+        "istanbul": "^0.4.1",
+        "mocha": "^3.1.2",
+        "sinon": "^1.17.6",
+        "sinon-chai": "^2.8.0"
     },
     "engines" : {
         "node" : ">=0.8"
