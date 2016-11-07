@@ -1,0 +1,10 @@
+{
+    "name": "luster-example-master-to-workers-event",
+    "version": "0.0.0",
+    "scripts": {
+        "start": "node master.js"
+    },
+    "bundlesDependencies": [
+        "luster"
+    ]
+}
