@@ -227,3 +227,13 @@ Callback accepts one optional argument: an error, if initalization failed.
 [deps-link]: https://david-dm.org/nodules/luster
 [devdeps-image]: https://img.shields.io/david/dev/nodules/luster.svg?style=flat
 [devdeps-link]: https://david-dm.org/nodules/luster#info=devDependencies
+
+## Debuggability
+
+If you are somehow lost in how master-worker interaction works, feel free to use `NODE_DEBUG=luster:eex` when launching your app.
+For example, you can check it within luster `examples` folder:
+```
+cd examples/custom_master_and_ipc/
+NODE_DEBUG=luster:eex npm run start
+```
+You will see the sequence of events both on master and workers, along with underlying IPC messages.
