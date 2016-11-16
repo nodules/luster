@@ -1,3 +1,10 @@
+luster (0.7.3); urgency=low
+
+  * Implement callbacks for remote commands
+    https://github.com/nodules/luster/pull/41
+
+ -- Alexey Rybakov <alexrybakov@yandex.ru>  Wed, 16 Nov 2016 16:17:25 +0300
+
 luster (0.6.3); urgency=low
 
   * Configurable: nested property override via LUSTER_CONF is broken
