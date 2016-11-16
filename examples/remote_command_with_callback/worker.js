@@ -9,7 +9,7 @@ function getRandomInt(max, min) {
 worker.registerRemoteCommandWithCallback('update-data', function(callback, data) {
     my_worker_data = data;
     setTimeout(function() {
-        callback();
+        callback('Some test data to send back');
     }, getRandomInt(1, 5) * 1000);
 });
 

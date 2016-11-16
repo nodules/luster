@@ -26,11 +26,12 @@ if (proc.isMaster) {
             if (req.url === '/update-data-on-first') {
                 return proc.workers['1'].remoteCallWithCallback({
                     command: 'update-data',
-                    callback: function(error) {
+                    callback: function(error, data) {
                         if (error) {
                             res.end(error.message + '\n');
                         } else {
-                            res.end('Done updating worker#1!\n');
+                            res.write('Done updating worker#1!\n');
+                            res.end('Look, I even got some data in callback: ' + data + '\n');
                         }
                     },
                     timeout: 5000,
