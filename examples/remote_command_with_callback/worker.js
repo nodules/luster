@@ -22,7 +22,7 @@ http
         if (req.url === '/log-version') {
             return worker.remoteCallWithCallback({
                 command: 'log-version',
-                callback: function(error) {
+                callback: function(proc, error) {
                     if (error) {
                         return res.end(error.message + '\n');
                     }

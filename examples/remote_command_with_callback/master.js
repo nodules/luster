@@ -26,11 +26,11 @@ if (proc.isMaster) {
             if (req.url === '/update-data-on-first') {
                 return proc.workers['1'].remoteCallWithCallback({
                     command: 'update-data',
-                    callback: function(error, data) {
+                    callback: function(worker, error, data) {
                         if (error) {
                             res.end(error.message + '\n');
                         } else {
-                            res.write('Done updating worker#1!\n');
+                            res.write('Done updating worker #' + worker.wid + '\n');
                             res.end('Look, I even got some data in callback: ' + data + '\n');
                         }
                     },
@@ -44,13 +44,13 @@ if (proc.isMaster) {
 
                 return proc.remoteCallToAllWithCallback({
                     command: 'update-data',
-                    callback: function(error) {
+                    callback: function(worker, error) {
                         waitWorkers--;
 
                         if (error) {
                             res.write(error.message + '\n');
                         } else {
-                            res.write('Done updating worker!\n');
+                            res.write('Done updating worker #' + worker.wid + '\n');
                         }
 
                         if ( ! waitWorkers) {
