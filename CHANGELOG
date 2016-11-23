@@ -1,3 +1,10 @@
+luster (0.8.0); urgency=low
+
+  * Pass process wrapper to rpc callback
+    https://github.com/nodules/luster/pull/42
+
+ -- Alexey Rybakov <alexrybakov@yandex.ru>  Wed, 23 Nov 2016 12:38:56 +0300
+
 luster (0.7.3); urgency=low
 
   * Implement callbacks for remote commands
