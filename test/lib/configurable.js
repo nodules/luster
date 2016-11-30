@@ -168,6 +168,24 @@ describe('Configurable', function() {
                     assert.strictEqual(configurable.config.get('foo'), false);
                 });
             });
+
+            it('should override getters', function() {
+                config.logs = {
+                    get stderr() {
+                        return './error.log';
+                    },
+                    get stdout() {
+                        return './debug.log';
+                    }
+                };
+
+                process.env.LUSTER_CONF = 'logs.stdout=/dev/null;logs.stderr=/dev/null;';
+
+                configurable.configure(config);
+
+                assert.strictEqual(configurable.config.get('logs.stderr'), '/dev/null');
+                assert.strictEqual(configurable.config.get('logs.stdout'), '/dev/null');
+            });
         });
     });
 
