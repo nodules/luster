@@ -64,6 +64,8 @@
         "requireParamTypes": true
     },
     "requireSpaceAfterObjectKeys": true,
+    "requireLineFeedAtFileEnd": true,
     "excludeFiles": [
+        "**/node_modules"
     ]
 }

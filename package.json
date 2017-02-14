@@ -7,9 +7,10 @@
         "luster" : "./bin/luster.js"
     },
     "scripts": {
-        "lint": "./node_modules/.bin/jshint --config ./.jshintrc ./lib && ./node_modules/.bin/jscs ./lib",
-        "unit": "istanbul test _mocha -- --recursive test/",
-        "test": "npm run lint && npm run unit"
+        "lint": "./node_modules/.bin/jshint --config ./.jshintrc ./lib ./test/func && ./node_modules/.bin/jscs ./lib ./test/func",
+        "unit": "istanbul test _mocha -- test/lib",
+        "func": "./node_modules/.bin/mocha test/func/test",
+        "test": "npm run lint && npm run unit && npm run func"
     },
     "repository" : {
         "type" : "git",
