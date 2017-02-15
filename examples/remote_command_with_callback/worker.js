@@ -21,15 +21,15 @@ http
 
         if (req.url === '/log-version') {
             return worker.remoteCallWithCallback({
-                command: 'log-version',
-                callback: function(proc, error) {
+                command : 'log-version',
+                callback : function(proc, error) {
                     if (error) {
                         return res.end(error.message + '\n');
                     }
 
                     res.end('Master logged app version to stdout!\n');
                 },
-                data: '1.0.0'
+                data : '1.0.0'
             });
         }
 
