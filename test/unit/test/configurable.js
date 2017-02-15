@@ -1,6 +1,7 @@
+/* globals sinon,assert,describe,it,beforeEach,afterEach */
 'use strict';
-var Configurable = require('../../lib/configurable'),
-    LusterConfigurationError = require('../../lib/errors').LusterConfigurationError,
+var Configurable = require('../../../lib/configurable'),
+    LusterConfigurationError = require('../../../lib/errors').LusterConfigurationError,
     fixturesConf = require('../fixtures/luster.conf'),
     extend = require('extend');
 
