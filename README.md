@@ -1,4 +1,4 @@
-Luster [![NPM version][npm-image]][npm-link]
+Luster [![NPM version][npm-image]][npm-link] [![Build status][build-image]][build-link]
 ======
 
 [![Dependency status][deps-image]][deps-link]
