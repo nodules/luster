@@ -1,56 +1,55 @@
 {
-    "name" : "luster",
-    "version" : "0.8.1",
-    "description" : "Node.js cluster wrapper",
-    "main" : "./lib/luster.js",
-    "bin" : {
-        "luster" : "./bin/luster.js"
-    },
-    "scripts": {
-        "lint": "./node_modules/.bin/jshint --config ./.jshintrc ./lib ./test ./examples && ./node_modules/.bin/jscs ./lib ./test ./examples",
-        "unit": "istanbul test _mocha -- test/unit/test",
-        "func": "./node_modules/.bin/mocha test/func/test",
-        "test": "npm run lint && npm run unit && npm run func"
-    },
-    "repository" : {
-        "type" : "git",
-        "url" : "git://github.com/nodules/luster.git"
-    },
-    "keywords" : [
-        "cluster",
-        "luster",
-        "ipc"
-    ],
-    "author" : "Phillip Kovalev <twilightfeel@gmail.com> (https://github.com/kaero)",
-    "maintainers" : [
-        "Phillip Kovalev <twilightfeel@gmail.com> (https://github.com/kaero)"
-    ],
-    "contributors" : [
-        "Vladimir Varankin <nek.narqo@gmail.com> (https://github.com/narqo)",
-        "Alexey Rybakov <alexrybakov@yandex.ru> (https://github.com/flackus)"
-    ],
-    "licenses" : [
-        {
-            "type" : "MIT",
-            "url" : "http://github.com/nodules/luster/raw/master/LICENSE"
-        }
-    ],
-    "readmeFilename" : "README.md",
-    "dependencies" : {
-        "objex" : "^0.4.1",
-        "terror" : "^1.0.0",
-        "extend": "^3.0.0"
-    },
-    "devDependencies" : {
-        "chai": "^3.5.0",
-        "jshint" : "^2.1.0",
-        "jscs" : "^1.13.0",
-        "istanbul": "^0.4.1",
-        "mocha": "^3.1.2",
-        "sinon": "^1.17.6",
-        "sinon-chai": "^2.8.0"
-    },
-    "engines" : {
-        "node" : ">=4"
+  "name": "luster",
+  "version": "0.8.1",
+  "description": "Node.js cluster wrapper",
+  "main": "./lib/luster.js",
+  "bin": {
+    "luster": "./bin/luster.js"
+  },
+  "scripts": {
+    "lint": "eslint ./lib ./test ./examples",
+    "unit": "istanbul test _mocha -- test/unit/test",
+    "func": "mocha test/func/test",
+    "test": "npm run lint && npm run unit && npm run func"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nodules/luster.git"
+  },
+  "keywords": [
+    "cluster",
+    "luster",
+    "ipc"
+  ],
+  "author": "Phillip Kovalev <twilightfeel@gmail.com> (https://github.com/kaero)",
+  "maintainers": [
+    "Phillip Kovalev <twilightfeel@gmail.com> (https://github.com/kaero)"
+  ],
+  "contributors": [
+    "Vladimir Varankin <nek.narqo@gmail.com> (https://github.com/narqo)",
+    "Alexey Rybakov <alexrybakov@yandex.ru> (https://github.com/flackus)"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/nodules/luster/raw/master/LICENSE"
     }
+  ],
+  "dependencies": {
+    "extend": "^3.0.0",
+    "objex": "^0.4.1",
+    "terror": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.15.0",
+    "eslint-config-nodules": "^0.4.0",
+    "istanbul": "^0.4.1",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
+  },
+  "engines": {
+    "node": ">=4"
+  }
 }

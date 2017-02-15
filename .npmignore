@@ -1,4 +1,3 @@
-.git*
-npm-debug.log
+.*
 examples
 test

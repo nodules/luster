@@ -16,14 +16,14 @@ describe('stopTimeout', function() {
 
     it('should kill infinite worker', function() {
         return instance.sendWaitTimeout('hang', 10)
-            .then(function() {return instance.sendWaitAnswer('restart', 'restarted');})
-            .then(function() {return instance.sendWaitAnswer('request', 'response');});
+            .then(function() { return instance.sendWaitAnswer('restart', 'restarted'); })
+            .then(function() { return instance.sendWaitAnswer('request', 'response'); });
     });
 
     it('should kill infinite worker that disconnected itself', function() {
         return instance.sendWaitAnswer('disconnect and hang', 'disconnected')
-            .then(function() {return instance.sendWaitAnswer('wait worker', 'worker ready');})
-            .then(function() {return instance.sendWaitAnswer('request', 'response');});
+            .then(function() { return instance.sendWaitAnswer('wait worker', 'worker ready'); })
+            .then(function() { return instance.sendWaitAnswer('request', 'response'); });
     });
 
     after(function() {

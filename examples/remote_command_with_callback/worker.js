@@ -1,13 +1,13 @@
 var http = require('http'),
     worker = require('luster'),
-    my_worker_data = 'No data for now :( Please set it via my master.';
+    myWorkerData = 'No data for now :( Please set it via my master.';
 
 function getRandomInt(max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 worker.registerRemoteCommandWithCallback('update-data', function(callback, data) {
-    my_worker_data = data;
+    myWorkerData = data;
     setTimeout(function() {
         callback('Some test data to send back');
     }, getRandomInt(1, 5) * 1000);
@@ -16,20 +16,20 @@ worker.registerRemoteCommandWithCallback('update-data', function(callback, data)
 http
     .createServer(function(req, res) {
         if (req.url === '/') {
-            return res.end(my_worker_data + '\n');
+            return res.end(myWorkerData + '\n');
         }
 
         if (req.url === '/log-version') {
             return worker.remoteCallWithCallback({
-                command : 'log-version',
-                callback : function(proc, error) {
+                command: 'log-version',
+                callback: function(proc, error) {
                     if (error) {
                         return res.end(error.message + '\n');
                     }
 
                     res.end('Master logged app version to stdout!\n');
                 },
-                data : '1.0.0'
+                data: '1.0.0'
             });
         }
 

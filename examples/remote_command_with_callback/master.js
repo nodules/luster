@@ -4,11 +4,11 @@ var http = require('http'),
 
 proc
     .configure({
-        app : 'worker.js',
-        workers : 4,
-        server : {
-            port : MASTER_PORT + 1,
-            groups : 4
+        app: 'worker.js',
+        workers: 4,
+        server: {
+            port: MASTER_PORT + 1,
+            groups: 4
         }
     }, true, __dirname)
     .run();
@@ -25,8 +25,8 @@ if (proc.isMaster) {
         .createServer(function(req, res) {
             if (req.url === '/update-data-on-first') {
                 return proc.workers['1'].remoteCallWithCallback({
-                    command : 'update-data',
-                    callback : function(worker, error, data) {
+                    command: 'update-data',
+                    callback: function(worker, error, data) {
                         if (error) {
                             res.end(error.message + '\n');
                         } else {
@@ -34,8 +34,8 @@ if (proc.isMaster) {
                             res.end('Look, I even got some data in callback: ' + data + '\n');
                         }
                     },
-                    timeout : 5000,
-                    data : 'Ut enim ad minim veniam'
+                    timeout: 5000,
+                    data: 'Ut enim ad minim veniam'
                 });
             }
 
@@ -43,8 +43,8 @@ if (proc.isMaster) {
                 var waitWorkers = proc.getWorkersArray().length;
 
                 return proc.remoteCallToAllWithCallback({
-                    command : 'update-data',
-                    callback : function(worker, error) {
+                    command: 'update-data',
+                    callback: function(worker, error) {
                         waitWorkers--;
 
                         if (error) {
@@ -57,8 +57,8 @@ if (proc.isMaster) {
                             res.end();
                         }
                     },
-                    timeout : 5000,
-                    data : 'Lorem ipsum dolor sit amet'
+                    timeout: 5000,
+                    data: 'Lorem ipsum dolor sit amet'
                 });
             }
 

@@ -25,10 +25,10 @@ if (proc.isMaster) {
 
 proc
     .configure({
-        app : 'worker.js',
-        workers : 2,
-        server : {
-            port : 10080
+        app: 'worker.js',
+        workers: 2,
+        server: {
+            port: 10080
         }
     }, true, __dirname)
     .run();
