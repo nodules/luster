@@ -5,11 +5,11 @@ var http = require('http'),
 
 proc
     .configure({
-        app: 'worker.js',
-        workers: 4,
-        server: {
-            port: MASTER_PORT + 1,
-            groups: 4
+        app : 'worker.js',
+        workers : 4,
+        server : {
+            port : MASTER_PORT + 1,
+            groups : 4
         }
     }, true, __dirname)
     .run();

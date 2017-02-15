@@ -18,7 +18,7 @@ if (proc.isMaster) {
                 if (worker.id !== sender.id) {
                     // pass sender.wid to another workers know command source
                     worker.remoteCall('updateCounter', sender.id, value);
-                };
+                }
             });
         });
 }
