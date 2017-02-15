@@ -9,7 +9,6 @@ Luster [![NPM version][npm-image]][npm-link] [![Build status][build-image]][buil
 * No worker code modification is necessary.
 * Provides common solution for master process.
 * Maintains specified quantity of running workers.
-* Allocates separate ports for debugging workers in the cluster.
 * Runs groups of workers on the different ports for 3rd party load balancing (nginx or haproxy, for example).
 * Allows configuration via JSON, JS or anything that can be `require`d out of the box.
 * Zero downtime successive workers' restart.
@@ -111,15 +110,6 @@ module.exports = {
         // number of workers' groups; each group will
         // have its own port number (port + group number)
         groups : 2
-    },
-
-    debug : {
-        // debug port for first worker; each following will
-        // use previous worker port + 1
-        //
-        // deprecated: this option doesn't work with Node.js 0.12+
-        // and might be removed in future major versions
-        port : 5010
     },
 
     // extensions to load
