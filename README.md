@@ -227,6 +227,8 @@ Callback accepts one optional argument: an error, if initalization failed.
 [deps-link]: https://david-dm.org/nodules/luster
 [devdeps-image]: https://img.shields.io/david/dev/nodules/luster.svg?style=flat
 [devdeps-link]: https://david-dm.org/nodules/luster#info=devDependencies
+[build-image]: https://travis-ci.org/nodules/luster.svg?branch=master
+[build-link]: https://travis-ci.org/nodules/luster
 
 ## Debuggability
 
