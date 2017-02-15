@@ -1,6 +1,6 @@
 {
     "name" : "luster",
-    "version" : "0.8.1",
+    "version" : "1.0.0",
     "description" : "Node.js cluster wrapper",
     "main" : "./lib/luster.js",
     "bin" : {
@@ -51,6 +51,6 @@
         "sinon-chai": "^2.8.0"
     },
     "engines" : {
-        "node" : ">=0.8"
+        "node" : ">=4"
     }
 }
