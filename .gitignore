@@ -1,6 +1,6 @@
 *.DS_Store
-/.idea
-/node_modules
-/examples/*/tmp
+.idea
+node_modules
+examples/*/tmp
 coverage
 *.log

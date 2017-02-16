@@ -1,7 +1,7 @@
 var worker = require('luster');
 
 function hang() {
-    while (true) {} // jshint ignore:line
+    while (true) {} // eslint-disable-line
 }
 
 worker.registerRemoteCommand('hang', hang);

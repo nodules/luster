@@ -1,9 +1,9 @@
 var http = require('http'),
     worker = require('luster'),
-    my_worker_data = 'No data for now :( Please visit my master.';
+    myWorkerData = 'No data for now :( Please visit my master.';
 
-worker.on('master update-data', function(received_data) {
-    my_worker_data = received_data;
+worker.on('master update-data', function(receivedData) {
+    myWorkerData = receivedData;
 });
 
 http
@@ -12,7 +12,7 @@ http
             res.statusCode = 404;
             return res.end();
         }
-        res.end('my_worker_data: ' + my_worker_data);
+        res.end('myWorkerData: ' + myWorkerData);
     })
     .listen(process.env.port, function() {
         console.log('Worker #%s ready on http://localhost:%s', worker.id, process.env.port);

@@ -7,4 +7,4 @@ global.assert = chai.assert;
 
 chai.use(require('sinon-chai'));
 
-sinon.assert.expose(chai.assert, { prefix : '' });
+sinon.assert.expose(chai.assert, { prefix: '' });
