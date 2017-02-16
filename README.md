@@ -14,6 +14,10 @@ Luster [![NPM version][npm-image]][npm-link] [![Build status][build-image]][buil
 * Zero downtime successive workers' restart.
 * Simple and flexible API for building extensions and development of custom master-workers solutions.
 
+## Node.js versions support
+In `luster@1.0.0` we dropped support for `node<4`.
+If you desperately need to make it run on older `node` versions, use `luster@0.8.1`.
+
 ## Quick start
 
 Install `luster` module and save it as runtime dependency:

@@ -1,3 +1,17 @@
+luster (1.0.0); urgency=low
+
+  * Dropped node<4 support:
+        --debug support and workarounds
+        setImmediate fallback
+    https://github.com/nodules/luster/pull/50
+
+  * stopTimeout parameter now uses worker.process.kill() to kill hung workers
+    stopTimeout time now starts counting from restart(), stop() calls or
+    disconnect event, whichever happens first
+    https://github.com/nodules/luster/pull/45
+
+ -- Alexey Rybakov <alexrybakov@yandex.ru>  Thu, 16 Feb 2017 14:42:16 +0300
+
 luster (0.8.1); urgency=low
 
   * Configurable: support overriding of getters
