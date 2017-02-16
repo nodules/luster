@@ -12,7 +12,7 @@ Luster [![NPM version][npm-image]][npm-link] [![Build status][build-image]][buil
 * Allocates separate ports for debugging workers in the cluster.
 * Runs groups of workers on the different ports for 3rd party load balancing (nginx or haproxy, for example).
 * Allows configuration via JSON, JS or anything that can be `require`d out of the box.
-* Zero downtime successive workers' restart.
+* Zero downtime successive workers’ restart.
 * Simple and flexible API for building extensions and development of custom master-workers solutions.
 
 ## Quick start
@@ -108,7 +108,7 @@ module.exports = {
         // > server.listen(process.env.port)
         port : 8080,
 
-        // number of workers' groups; each group will
+        // number of workers’ groups; each group will
         // have its own port number (port + group number)
         groups : 2
     },
@@ -138,7 +138,7 @@ module.exports = {
         }
     },
 
-    // if extensions' modules can't be resolved as related to
+    // if extensions’ modules can’t be resolved as related to
     // luster module or worker path, then absolute path
     // to the directory, which contains extensions modules
     // must be declared here:
@@ -163,7 +163,7 @@ module.exports = {
 ### Extensions development
 
 Extensions is a simple Node.js module, which must export object with `configure` function,
-which will be called duering master and worker configuration.
+which will be called during master and worker configuration.
 
 > @todo
 
@@ -184,7 +184,7 @@ module.exports = {
 }
 ```
 
-Asynchronous extension initalization:
+Asynchronous extension initialization:
 ```javascript
 module.exports = {
     initializeOnMaster : function(master, done) {
@@ -217,9 +217,9 @@ module.exports = {
 }
 ```
 
-To enable asynchronous initalization of an extension, `configure` function must be declared with 3 or more arguments,
+To enable asynchronous initialization of an extension, `configure` function must be declared with 3 or more arguments,
 where 3-rd argument is callback, which must be called by extensions when initialization has been finished.
-Callback accepts one optional argument: an error, if initalization failed.
+Callback accepts one optional argument: an error, if initialization failed.
 
 [npm-image]: https://img.shields.io/npm/v/luster.svg?style=flat
 [npm-link]: https://npmjs.org/package/luster
