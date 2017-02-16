@@ -153,9 +153,7 @@ module.exports = {
 ### Extensions development
 
 Extensions is a simple Node.js module, which must export object with `configure` function,
-which will be called duering master and worker configuration.
-
-> @todo
+which will be called during master and worker configuration.
 
 Synchronous extension initialization:
 ```javascript
