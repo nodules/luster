@@ -1,0 +1,30 @@
+/* globals describe,it,before,after,assert */
+'use strict';
+
+var LusterInstance = require('../helpers/luster_instance');
+
+describe('remote calls on master', function() {
+    var instance;
+
+    before(function() {
+        return LusterInstance
+            .run('../fixtures/remote_call_on_master/master.js')
+            .then(function (inst) {
+                instance = inst;
+            });
+    });
+
+    it('should allow master to call worker', function(done) {
+        setTimeout(function() {
+            assert.equal(instance.output(), '1\n2\n');
+            done();
+        }, 100);
+    });
+
+    after(function() {
+        if (instance) {
+            instance.kill();
+            instance = null;
+        }
+    });
+});

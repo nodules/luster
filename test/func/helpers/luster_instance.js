@@ -61,20 +61,28 @@ var fork = require('child_process').fork,
 /**
  * A wrapper for `ChildProcess`
  * @class LusterInstance
- * @param {ChildProcess} process
+ * @param {ChildProcess} child
  * @constructor
  */
-function LusterInstance(process) {
-    this._process = process;
+function LusterInstance(child) {
+    this._process = child;
+    this._output = '';
+    var that = this;
+    this._process.stdout.on('data', function(chunk) {
+        that._output += chunk.toString('utf8');
+    });
+    this._process.stderr.pipe(process.stderr, { end: false } );
 }
 
 /**
  * Creates new LusterInstance with master at `name` and waits for master 'ready' message.
  * @param {String} name - absolute path or path relative to `luster_instance` module.
+ * @param {Object} [env] - environment key-value pairs
  * @returns {Promise}
  */
-LusterInstance.run = function(name) {
-    var instance = fork(path.resolve(__dirname, name));
+LusterInstance.run = function(name, env) {
+    var instance = fork(path.resolve(__dirname, name), { env: env, silent: true } );
+    var res = new LusterInstance(instance);
 
     // Promise is resolved when master process replies to ping
     // Promise is rejected if master was unable to reply to ping within 1 second
@@ -83,7 +91,7 @@ LusterInstance.run = function(name) {
         instance.once('message', function(message) {
             clearTimeout(rejectTimeout);
             if (message === 'ready') {
-                resolve(new LusterInstance(instance));
+                resolve(res);
             } else {
                 reject(new Error('First message from master should be "ready", got "' + message + '" instead'));
             }
@@ -124,6 +132,33 @@ LusterInstance.prototype.sendWaitAnswer = function(message, expectedAnswer) {
             }
         });
     });
+};
+
+/**
+ * Waits for message from master instance.
+ * Resolves if received message is expected answer and rejects otherwise.
+ * @param {String} expectedAnswer
+ * @returns {Promise}
+ */
+LusterInstance.prototype.waitAnswer = function(expectedAnswer) {
+    var self = this;
+    return new Promise(function(resolve, reject) {
+        self._process.once('message', function(answer) {
+            if (answer === expectedAnswer) {
+                resolve();
+            } else {
+                reject('Expected master to send "' + expectedAnswer + '", got "' + answer + '" instead');
+            }
+        });
+    });
+};
+
+/**
+ * Returns all of the spawned processes output (stdout only) from their start
+ * @returns {String}
+ */
+LusterInstance.prototype.output = function() {
+    return this._output;
 };
 
 /**
