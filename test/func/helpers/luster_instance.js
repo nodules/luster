@@ -46,9 +46,11 @@
  *                 break;
  *             case 'request':
  *                 // We reply with some text, so test will use `sendWaitAnswer` to call this
- *                 proc.remoteCallToAllWithCallback({command: 'request', callback: function(worker, something, response) {
- *                     process.send(response);
- *                 }});
+ *                 proc.remoteCallToAllWithCallback({
+ *                     command: 'request',
+ *                     callback: function(worker, something, response) {
+ *                         process.send(response);
+ *                     }});
  *                 break;
  *         }
  *     });
