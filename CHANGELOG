@@ -1,3 +1,14 @@
+luster (1.1.0); urgency=low
+
+  * Remade most of examples as functional tests
+
+  * Fixed linter warnings
+
+  * wid is now passed as an environment variable and initialized in constructor
+    This allows to use wid in extensions & fixed EventEmitterEx logs
+
+ -- Slava Baginov <slnpacifist@gmail.com> Mon, 20 Mar 2017 16:04:59 +0300
+
 luster (1.0.0); urgency=low
 
   * Dropped node<4 support:
