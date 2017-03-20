@@ -13,7 +13,6 @@ var ClusterProcess = require('../../../lib/cluster_process'),
 TestClusterProcess = ClusterProcess.create(function TestClusterProcess() {});
 TestClusterProcess.prototype._setupIPCMessagesHandler = function() {};
 
-
 describe('ClusterProcess', function() {
     var clusterProcess,
         sandbox = sinon.sandbox.create();
