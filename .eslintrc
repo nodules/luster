@@ -4,6 +4,7 @@
   "rules": {
     "no-console": 0,
     "no-mixed-requires": 0,
+    "no-multiple-empty-lines": [2, {"max": 1}],
     "global-require": 0
   },
   "env": {
