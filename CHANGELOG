@@ -1,3 +1,7 @@
+luster (1.1.1) urgency=low
+
+  * Fixed `wid` to be Number (was String before) in workers
+
 luster (1.1.0); urgency=low
 
   * Remade most of examples as functional tests
