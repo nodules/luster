@@ -7,7 +7,7 @@ var fork = require('child_process').fork,
 describe('manualReady option', function() {
     var instance;
 
-    before(function() {
+    beforeEach(function() {
         instance = fork(path.resolve(__dirname, '../fixtures/manual_ready/master.js'));
     });
 
@@ -24,7 +24,7 @@ describe('manualReady option', function() {
         });
     });
 
-    after(function() {
+    afterEach(function() {
         instance.kill();
     });
 });

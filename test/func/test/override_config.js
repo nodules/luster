@@ -6,7 +6,7 @@ var LusterInstance = require('../helpers/luster_instance');
 describe('LUSTER_CONF env variable', function() {
     var instance;
 
-    before(function() {
+    beforeEach(function() {
         return LusterInstance
             .run('../fixtures/override_config/master.js', { LUSTER_CONF: 'test=good' } )
             .then(function (inst) {
@@ -19,7 +19,7 @@ describe('LUSTER_CONF env variable', function() {
             .then(function() { return instance.waitAnswer('worker - good'); } );
     });
 
-    after(function() {
+    afterEach(function() {
         if (instance) {
             instance.kill();
             instance = null;

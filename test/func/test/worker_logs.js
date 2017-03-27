@@ -6,7 +6,7 @@ var LusterInstance = require('../helpers/luster_instance');
 describe('worker logs', function() {
     var instance;
 
-    before(function() {
+    beforeEach(function() {
         return LusterInstance
             .run('../fixtures/worker_logs/master.js', {NODE_DEBUG: 'luster:eex'})
             .then(function (inst) {
@@ -28,7 +28,7 @@ describe('worker logs', function() {
         }, 100);
     });
 
-    after(function() {
+    afterEach(function() {
         if (instance) {
             instance.kill();
             instance = null;

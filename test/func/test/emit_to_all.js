@@ -6,7 +6,7 @@ var LusterInstance = require('../helpers/luster_instance');
 describe('emitToAll', function() {
     var instance;
 
-    before(function() {
+    beforeEach(function() {
         return LusterInstance
             .run('../fixtures/emit_to_all/master.js')
             .then(function (inst) {
@@ -21,7 +21,7 @@ describe('emitToAll', function() {
         }, 100);
     });
 
-    after(function() {
+    afterEach(function() {
         if (instance) {
             instance.kill();
             instance = null;
