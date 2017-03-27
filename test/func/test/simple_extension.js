@@ -6,7 +6,7 @@ var LusterInstance = require('../helpers/luster_instance');
 describe('simple extension', function() {
     var instance;
 
-    before(function() {
+    beforeEach(function() {
         return LusterInstance
             .run('../fixtures/simple_extension/master.js')
             .then(function (inst) {
@@ -29,7 +29,7 @@ describe('simple extension', function() {
         }, 100);
     });
 
-    after(function() {
+    afterEach(function() {
         if (instance) {
             instance.kill();
             instance = null;

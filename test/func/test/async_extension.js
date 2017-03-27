@@ -6,7 +6,7 @@ var LusterInstance = require('../helpers/luster_instance');
 describe('async extension', function() {
     var instance;
 
-    before(function() {
+    beforeEach(function() {
         return LusterInstance
             .run('../fixtures/async_extension/master.js')
             .then(function (inst) {
@@ -31,7 +31,7 @@ describe('async extension', function() {
         }, 100);
     });
 
-    after(function() {
+    afterEach(function() {
         if (instance) {
             instance.kill();
             instance = null;

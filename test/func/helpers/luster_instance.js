@@ -13,16 +13,20 @@
  *       workers: 1,
  *       control: {
  *           stopTimeout: 500
- *       }}, true, __dirname)
+ *       }}, true, __dirname)2
  *   .run();
  *
  * @example usage in test case
- * before(function() {
+ * beforeEach(function() {
  *        return LusterInstance
  *            .run('../fixtures/force_kill/master.js')
  *            .then(function (inst) {
  *                instance = inst;
  *            });
+ *    });
+ * afterEach(function() {
+ *        instance.kill();
+ *        instance = null;
  *    });
  *
  * Master should send 'ready' message once it has started:
@@ -89,9 +93,7 @@ LusterInstance.run = function(name, env) {
     // Promise is resolved when master process replies to ping
     // Promise is rejected if master was unable to reply to ping within 1 second
     return new Promise(function(resolve, reject) {
-        var rejectTimeout = setTimeout(reject, 1000);
         instance.once('message', function(message) {
-            clearTimeout(rejectTimeout);
             if (message === 'ready') {
                 resolve(res);
             } else {

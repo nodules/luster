@@ -6,7 +6,7 @@ var LusterInstance = require('../helpers/luster_instance');
 describe('stopTimeout', function() {
     var instance;
 
-    before(function() {
+    beforeEach(function() {
         return LusterInstance
             .run('../fixtures/force_kill/master.js')
             .then(function (inst) {
@@ -26,7 +26,7 @@ describe('stopTimeout', function() {
             .then(function() { return instance.sendWaitAnswer('request', 'response'); });
     });
 
-    after(function() {
+    afterEach(function() {
         if (instance) {
             instance.kill();
             instance = null;

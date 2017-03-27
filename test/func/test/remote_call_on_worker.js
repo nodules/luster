@@ -6,7 +6,7 @@ var LusterInstance = require('../helpers/luster_instance');
 describe('remote calls on worker', function() {
     var instance;
 
-    before(function() {
+    beforeEach(function() {
         return LusterInstance
             .run('../fixtures/remote_call_on_worker/master.js')
             .then(function (inst) {
@@ -21,7 +21,7 @@ describe('remote calls on worker', function() {
         }, 100);
     });
 
-    after(function() {
+    afterEach(function() {
         if (instance) {
             instance.kill();
             instance = null;

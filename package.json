@@ -9,8 +9,8 @@
   "scripts": {
     "lint": "eslint ./lib ./test ./examples",
     "unit": "istanbul test _mocha -- test/unit/test",
-    "func": "mocha test/func/test",
-    "test": "npm run lint && npm run unit && npm run func"
+    "func": "mocha test/func/test $@",
+    "test": "npm run lint && npm run unit && npm run func -- $@"
   },
   "repository": {
     "type": "git",
