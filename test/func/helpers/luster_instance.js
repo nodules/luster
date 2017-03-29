@@ -13,7 +13,7 @@
  *       workers: 1,
  *       control: {
  *           stopTimeout: 500
- *       }}, true, __dirname)2
+ *       }}, true, __dirname)
  *   .run();
  *
  * @example usage in test case
@@ -68,27 +68,38 @@ var fork = require('child_process').fork,
  * A wrapper for `ChildProcess`
  * @class LusterInstance
  * @param {ChildProcess} child
+ * @param {boolean} [pipeStderr] - whether instance's stderr should be piped to current process stderr
  * @constructor
  */
-function LusterInstance(child) {
+function LusterInstance(child, pipeStderr) {
+    if (pipeStderr === undefined) {
+        pipeStderr = true;
+    }
+
     this._process = child;
     this._output = '';
     var that = this;
     this._process.stdout.on('data', function(chunk) {
         that._output += chunk.toString('utf8');
     });
-    this._process.stderr.pipe(process.stderr, { end: false } );
+    if (pipeStderr) {
+        this._process.stderr.pipe(process.stderr, { end: false } );
+    }
 }
 
 /**
  * Creates new LusterInstance with master at `name` and waits for master 'ready' message.
  * @param {String} name - absolute path or path relative to `luster_instance` module.
  * @param {Object} [env] - environment key-value pairs
+ * @param {boolean} [pipeStderr]
  * @returns {Promise}
  */
-LusterInstance.run = function(name, env) {
+LusterInstance.run = function(name, env, pipeStderr) {
+    if (typeof(env) === 'boolean') {
+        pipeStderr = env;
+    }
     var instance = fork(path.resolve(__dirname, name), { env: env, silent: true } );
-    var res = new LusterInstance(instance);
+    var res = new LusterInstance(instance, pipeStderr);
 
     // Promise is resolved when master process replies to ping
     // Promise is rejected if master was unable to reply to ping within 1 second
