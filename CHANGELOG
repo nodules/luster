@@ -1,10 +1,19 @@
-luster (1.2.0) urgency=low
+luster (2.0.0); urgency=low
+
+    * Removed `Master.restartQueue` and `Master.processRestartQueue`. Use `Master.softRestart`,
+    `Master.scheduleWorkerRestart` and `WorkerWrapper.softRestart` instead.
+
+    * Fixed #44 - working becoming dead will not stop restart queue now.
+
+ -- Slava Baginov <slnpacifist@gmail.com> Wed Mar 29 17:21:00 2017 +0300
+
+luster (1.2.0); urgency=low
 
   * Added event 'disconnect' in workers. This is re-emitted from 'cluser.worker'
 
  -- Slava Baginov <slnpacifist@gmail.com> Wed Mar 22 19:44:11 2017 +0300
 
-luster (1.1.1) urgency=low
+luster (1.1.1); urgency=low
 
   * Fixed `wid` to be Number (was String before) in workers
 
