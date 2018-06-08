@@ -1,4 +1,4 @@
-var worker = require('luster');
+const worker = require('luster');
 setTimeout(function() {
     console.log('run', worker.wid);
     worker.ready();

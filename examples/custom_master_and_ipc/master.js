@@ -1,5 +1,5 @@
 /** @type {ClusterProcess} Master or Worker instance */
-var proc = require('luster');
+const proc = require('luster');
 
 if (proc.isMaster) {
     // register command repeater in the master

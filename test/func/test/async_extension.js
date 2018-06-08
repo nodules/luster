@@ -1,10 +1,10 @@
 /* globals describe,it,before,after,assert */
 'use strict';
 
-var LusterInstance = require('../helpers/luster_instance');
+const LusterInstance = require('../helpers/luster_instance');
 
 describe('async extension', function() {
-    var instance;
+    let instance;
 
     beforeEach(function() {
         return LusterInstance
@@ -15,7 +15,7 @@ describe('async extension', function() {
     });
 
     it('should have access to configuration and delay initialized event', function(done) {
-        var expected = [
+        const expected = [
             'luster-async extension configured on master process',
             'param1 = 2',
             'param2 = Hello',

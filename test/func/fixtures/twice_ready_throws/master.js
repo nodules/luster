@@ -1,5 +1,5 @@
 'use strict';
-var proc = require('luster');
+const proc = require('luster');
 
 proc
     .configure({

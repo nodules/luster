@@ -1,4 +1,4 @@
-var worker = require('luster');
+const worker = require('luster');
 
 worker.on('master log', function(data) {
     console.log(data);

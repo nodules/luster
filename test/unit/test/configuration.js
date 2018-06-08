@@ -1,6 +1,6 @@
 /* globals sinon,assert,describe,it,beforeEach,afterEach */
 'use strict';
-var Configuration = require('../../../lib/configuration'),
+const Configuration = require('../../../lib/configuration'),
     LusterConfigurationError = require('../../../lib/errors').LusterConfigurationError,
     fixturesConf = require('../fixtures/luster.conf'),
     helpers = require('../../../lib/configuration/helpers'),
@@ -13,8 +13,8 @@ var Configuration = require('../../../lib/configuration'),
 LusterConfigurationError.setLogger(function() {});
 
 describe('Configuration', function() {
-    var configuration,
-        sandbox = sinon.sandbox.create();
+    let configuration;
+    const sandbox = sinon.sandbox.create();
 
     afterEach(function() {
         sandbox.restore();
@@ -132,7 +132,7 @@ describe('Configuration', function() {
 
     describe('set helper', function() {
         it('should set first level property', function() {
-            var ctx = {};
+            const ctx = {};
 
             set(ctx, 'prop', 123);
 
@@ -140,7 +140,7 @@ describe('Configuration', function() {
         });
 
         it('should set deeply nested property', function() {
-            var ctx = { a: { b: { c: 1 } } };
+            const ctx = { a: { b: { c: 1 } } };
 
             set(ctx, 'a.b.c', 2);
 
@@ -148,7 +148,7 @@ describe('Configuration', function() {
         });
 
         it('should set deeply nested undefined property', function() {
-            var ctx = {};
+            const ctx = {};
 
             set(ctx, 'a.b.c', 2);
 
@@ -156,14 +156,14 @@ describe('Configuration', function() {
         });
 
         it('should fail to set nested property of scalar', function() {
-            var ctx = {a: 'hello'};
+            const ctx = {a: 'hello'};
 
             assert.throws(function() { set(ctx, 'a.b', 2); },
                 'LusterConfigurationError: Property "a" already exists and is not an object');
         });
 
         it('should override complex property with a scalar value', function() {
-            var ctx = { server: { a: 'b' } };
+            const ctx = { server: { a: 'b' } };
 
             set(ctx, 'server', true);
 
@@ -171,14 +171,14 @@ describe('Configuration', function() {
         });
 
         it('should fail to set element of array', function() {
-            var ctx = {a: [1, 2, 3]};
+            const ctx = {a: [1, 2, 3]};
 
             assert.throws(function() { set(ctx, 'a.1', 5); },
                 'LusterConfigurationError: Property "a" already exists and is not an object');
         });
 
         it('should override getters', function() {
-            var ctx = {
+            const ctx = {
                 get stderr() {
                     return './error.log';
                 },
@@ -192,7 +192,7 @@ describe('Configuration', function() {
 
     describe('get helper', function() {
         it('should get first level property', function() {
-            var ctx = { prop: 123 };
+            const ctx = { prop: 123 };
 
             assert.strictEqual(get(ctx, 'prop'), 123);
         });
@@ -202,7 +202,7 @@ describe('Configuration', function() {
         });
 
         it('should get deeply nested property', function() {
-            var ctx = { a: { b: { c: 1 } } };
+            const ctx = { a: { b: { c: 1 } } };
 
             assert.strictEqual(get(ctx, 'a.b.c'), 1);
         });
@@ -212,19 +212,19 @@ describe('Configuration', function() {
         });
 
         it('should return default for nested property of scalar', function() {
-            var ctx = { a: 'qqq' };
+            const ctx = { a: 'qqq' };
 
             assert.strictEqual(get(ctx, 'a.b', 2), 2);
         });
 
         it('should return complex property', function() {
-            var ctx = { server: { a: 'b' } };
+            const ctx = { server: { a: 'b' } };
 
             assert.strictEqual(get(ctx, 'server'), ctx.server);
         });
 
         it('should return value of getters', function() {
-            var ctx = {
+            const ctx = {
                 get stderr() {
                     return './error.log';
                 },
@@ -236,13 +236,13 @@ describe('Configuration', function() {
 
     describe('has helper', function() {
         it('should find first level property', function() {
-            var ctx = { prop: 123 };
+            const ctx = { prop: 123 };
 
             assert.strictEqual(has(ctx, 'prop'), true);
         });
 
         it('should find complex property', function() {
-            var ctx = { server: { a: 'b' } };
+            const ctx = { server: { a: 'b' } };
 
             assert.strictEqual(has(ctx, 'server'), true);
         });
@@ -252,25 +252,25 @@ describe('Configuration', function() {
         });
 
         it('should get deeply nested property', function() {
-            var ctx = { a: { b: { c: 1 } } };
+            const ctx = { a: { b: { c: 1 } } };
 
             assert.strictEqual(has(ctx, 'a.b.c'), true);
         });
 
         it('should not find missing nested property', function() {
-            var ctx = {a: {}};
+            const ctx = {a: {}};
 
             assert.strictEqual(has(ctx, 'a.b.c'), false);
         });
 
         it('should not find nested property of scalar', function() {
-            var ctx = { a: 'qqq' };
+            const ctx = { a: 'qqq' };
 
             assert.strictEqual(has(ctx, 'a.b', 2), false);
         });
 
         it('should find getters', function() {
-            var ctx = {
+            const ctx = {
                 get stderr() {
                     return './error.log';
                 },

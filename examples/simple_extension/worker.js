@@ -1,4 +1,4 @@
-var http = require('http'),
+const http = require('http'),
     cluster = require('cluster');
 
 if (cluster.worker.id === 1) {

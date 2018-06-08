@@ -1,4 +1,4 @@
-var proc = require('luster'),
+const proc = require('luster'),
     WorkerWrapper = require('luster/lib/worker_wrapper');
 
 proc
@@ -22,7 +22,7 @@ function restart() {
 }
 
 function killFirstWorker() {
-    var firstWorker = proc.getWorkersArray()[0];
+    const firstWorker = proc.getWorkersArray()[0];
     firstWorker.on('state', function(state) {
         // force dead state
         if (state === WorkerWrapper.STATES.LAUNCHING) {

@@ -1,6 +1,6 @@
 /* globals sinon */
 'use strict';
-var chai = require('chai');
+const chai = require('chai');
 
 global.sinon = require('sinon');
 global.assert = chai.assert;

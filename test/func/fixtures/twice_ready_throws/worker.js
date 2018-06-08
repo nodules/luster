@@ -1,5 +1,5 @@
 'use strict';
-var worker = require('luster'),
+const worker = require('luster'),
     LusterWorkerError = require('luster/lib/errors').LusterWorkerError;
 
 worker.once('ready', function() {

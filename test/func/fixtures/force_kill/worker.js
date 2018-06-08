@@ -1,4 +1,4 @@
-var worker = require('luster');
+const worker = require('luster');
 
 function hang() {
     while (true) {} // eslint-disable-line

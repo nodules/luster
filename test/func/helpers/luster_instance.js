@@ -61,7 +61,7 @@
  * }
  */
 
-var fork = require('child_process').fork,
+const fork = require('child_process').fork,
     path = require('path');
 
 /**
@@ -78,7 +78,7 @@ function LusterInstance(child, pipeStderr) {
 
     this._process = child;
     this._output = '';
-    var that = this;
+    const that = this;
     this._process.stdout.on('data', function(chunk) {
         that._output += chunk.toString('utf8');
     });
@@ -98,8 +98,8 @@ LusterInstance.run = function(name, env, pipeStderr) {
     if (typeof(env) === 'boolean') {
         pipeStderr = env;
     }
-    var instance = fork(path.resolve(__dirname, name), { env: env, silent: true } );
-    var res = new LusterInstance(instance, pipeStderr);
+    const instance = fork(path.resolve(__dirname, name), { env: env, silent: true } );
+    const res = new LusterInstance(instance, pipeStderr);
 
     // Promise is resolved when master process replies to ping
     // Promise is rejected if master was unable to reply to ping within 1 second
@@ -121,7 +121,7 @@ LusterInstance.run = function(name, env, pipeStderr) {
  * @returns {Promise}
  */
 LusterInstance.prototype.sendWaitTimeout = function(message, timeout) {
-    var self = this;
+    const self = this;
     return new Promise(function(resolve) {
         self._process.send(message);
         setTimeout(resolve, timeout);
@@ -136,7 +136,7 @@ LusterInstance.prototype.sendWaitTimeout = function(message, timeout) {
  * @returns {Promise}
  */
 LusterInstance.prototype.sendWaitAnswer = function(message, expectedAnswer) {
-    var self = this;
+    const self = this;
     return new Promise(function(resolve, reject) {
         self._process.send(message);
         self._process.once('message', function(answer) {
@@ -156,7 +156,7 @@ LusterInstance.prototype.sendWaitAnswer = function(message, expectedAnswer) {
  * @returns {Promise}
  */
 LusterInstance.prototype.waitAnswer = function(expectedAnswer) {
-    var self = this;
+    const self = this;
     return new Promise(function(resolve, reject) {
         self._process.once('message', function(answer) {
             if (answer === expectedAnswer) {
