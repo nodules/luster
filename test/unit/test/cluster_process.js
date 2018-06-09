@@ -2,8 +2,7 @@
 'use strict';
 const ClusterProcess = require('../../../lib/cluster_process'),
     Configuration = require('../../../lib/configuration'),
-    fixturesConf = require('../fixtures/luster.conf'),
-    extend = require('extend');
+    fixturesConf = require('../fixtures/luster.conf');
 
 /**
  * ClusterProcess is an abstract class, it cannot be instantiated for tests;
@@ -26,7 +25,7 @@ describe('ClusterProcess', function() {
 
         beforeEach(function () {
             clusterProcess = new TestClusterProcess();
-            config = extend({}, fixturesConf, true);
+            config = Object.assign({}, fixturesConf, true);
             clusterProcess.addListener('error', function () {});
         });
 

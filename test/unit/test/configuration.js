@@ -6,8 +6,7 @@ const Configuration = require('../../../lib/configuration'),
     helpers = require('../../../lib/configuration/helpers'),
     set = helpers.set,
     get = helpers.get,
-    has = helpers.has,
-    extend = require('extend');
+    has = helpers.has;
 
 // suppress stderr from terror
 LusterConfigurationError.setLogger(function() {});
@@ -22,7 +21,7 @@ describe('Configuration', function() {
 
     describe('applyEnvironment', function() {
         beforeEach(function() {
-            configuration = extend({}, fixturesConf, true);
+            configuration = Object.assign({}, fixturesConf, true);
         });
 
         afterEach(function() {
