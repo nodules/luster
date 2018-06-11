@@ -2,7 +2,7 @@
 const worker = require('luster'),
     LusterWorkerError = require('luster/lib/errors').LusterWorkerError;
 
-worker.once('ready', function() {
+worker.once('ready', () => {
     try {
         worker.ready();
     } catch(e) {

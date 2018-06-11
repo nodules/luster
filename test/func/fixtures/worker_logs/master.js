@@ -11,12 +11,8 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.once('running', function() {
-        setTimeout(function() {
-            proc.restart();
-        });
+    proc.once('running', () => {
+        setTimeout(() => proc.restart());
     });
-    proc.once('restarted', function() {
-        process.send('ready');
-    });
+    proc.once('restarted', () => process.send('ready'));
 }

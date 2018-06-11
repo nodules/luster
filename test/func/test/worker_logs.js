@@ -3,21 +3,19 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
-describe('worker logs', function() {
+describe('worker logs', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
         return LusterInstance
             .run('../fixtures/worker_logs/master.js', {NODE_DEBUG: 'luster:eex'})
-            .then(function (inst) {
-                instance = inst;
-            });
+            .then(inst => instance = inst);
     });
 
-    it('should use constant id even after restart', function(done) {
-        setTimeout(function() {
+    it('should use constant id even after restart', done => {
+        setTimeout(() => {
             const lines = instance.output().split('\n');
-            lines.forEach(function(line) {
+            lines.forEach(line => {
                 const match = /^Worker\((\d+)\)/.exec(line);
                 if (match) {
                     const id = parseInt(match[1], 10);
@@ -28,7 +26,7 @@ describe('worker logs', function() {
         }, 100);
     });
 
-    afterEach(function() {
+    afterEach(() => {
         if (instance) {
             instance.kill();
             instance = null;

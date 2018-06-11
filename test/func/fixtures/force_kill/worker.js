@@ -6,7 +6,7 @@ function hang() {
 
 worker.registerRemoteCommand('hang', hang);
 
-worker.registerRemoteCommand('disconnect and hang', function() {
+worker.registerRemoteCommand('disconnect and hang', () => {
     // Imitate situation when worker disconnects and cannot quit.
     // Master should kill such a worker after `stopTimeout`.
     process.removeAllListeners('disconnect');
@@ -14,6 +14,4 @@ worker.registerRemoteCommand('disconnect and hang', function() {
     process.disconnect();
 });
 
-worker.registerRemoteCommandWithCallback('request', function(callback) {
-    callback('response');
-});
+worker.registerRemoteCommandWithCallback('request', callback => callback('response'));

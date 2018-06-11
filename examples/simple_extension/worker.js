@@ -6,7 +6,7 @@ if (cluster.worker.id === 1) {
 }
 
 http
-    .createServer(function(req, res) {
+    .createServer((req, res) => {
         res.end('Worker #' + cluster.worker.id + ' at your service, sir!');
     })
     .listen(process.env.port);

@@ -11,15 +11,9 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.registerRemoteCommandWithCallback('test', function(callback, data) {
-        callback(data);
-    });
+    proc.registerRemoteCommandWithCallback('test', (callback, data) => callback(data));
 
-    proc.registerRemoteCommand('test 2', function(_worker, data) {
-        console.log(data);
-    });
+    proc.registerRemoteCommand('test 2', (_worker, data) => console.log(data));
 
-    proc.once('running', function() {
-        process.send('ready');
-    });
+    proc.once('running', () => process.send('ready'));
 }

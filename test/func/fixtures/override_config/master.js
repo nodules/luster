@@ -12,17 +12,15 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.once('running', function() {
+    proc.once('running', () => {
         process.send('ready');
-        setTimeout(function() {
+        setTimeout(() => {
             process.send('master - ' + proc.config.get('test'));
         }, 100);
-        setTimeout(function() {
+        setTimeout(() => {
             proc.remoteCallToAllWithCallback({
                 command: 'test',
-                callback: function (worker, error, text) {
-                    process.send('worker - ' + text);
-                },
+                callback: (worker, error, text) => process.send('worker - ' + text),
             });
         }, 200);
     });

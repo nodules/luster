@@ -6,7 +6,7 @@ if (worker.wid === 1 || worker.wid === 0) {
 }
 
 http
-    .createServer(function(req, res) {
+    .createServer((req, res) => {
         res.end('Worker #' + worker.wid + ' at your service, sir!');
     })
     .listen(process.env.port);

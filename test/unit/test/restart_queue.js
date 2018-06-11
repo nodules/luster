@@ -2,23 +2,21 @@
 'use strict';
 const RestartQueue = require('../../../lib/restart_queue');
 
-describe('RestartQueue', function() {
+describe('RestartQueue', () => {
     let queue;
     const sandbox = sinon.sandbox.create();
 
-    beforeEach(function() {
-        queue = new RestartQueue();
-    });
+    beforeEach(() => queue = new RestartQueue());
 
-    afterEach(function() {
+    afterEach(() => {
         sandbox.restore();
     });
 
-    describe('push', function() {
-        it('should do nothing if object is present in queue', function() {
+    describe('push', () => {
+        it('should do nothing if object is present in queue', () => {
             const q = sandbox.mock(queue);
             q.expects('_process').once();
-            const worker = {on: function() {}};
+            const worker = {on: () => {}};
             queue.push(worker);
             queue.push(worker);
             q.verify();

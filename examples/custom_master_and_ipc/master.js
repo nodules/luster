@@ -12,8 +12,8 @@ if (proc.isMaster) {
          * @param {WorkerWrapper} sender
          * @param {*} value
          */
-        function(sender, value) {
-            proc.forEach(function(worker) {
+        (sender, value) => {
+            proc.forEach(worker => {
                 // repeat command to all workers except `sender`
                 if (worker.id !== sender.id) {
                     // pass sender.wid to another workers know command source

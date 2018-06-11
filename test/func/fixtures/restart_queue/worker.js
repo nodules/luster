@@ -1,8 +1,8 @@
 const worker = require('luster');
-setTimeout(function() {
+setTimeout(() => {
     console.log('run', worker.wid);
     worker.ready();
 }, 10);
 
 // Do not let worker quit
-setTimeout(function() {}, 10000000000);
+setTimeout(() => {}, 10000000000);

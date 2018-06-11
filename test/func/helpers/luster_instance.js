@@ -1,4 +1,3 @@
-/* globals Promise */
 /**
  * @module test/func/runner
  *
@@ -80,7 +79,7 @@ class LusterInstance {
         this._process = child;
         this._output = '';
         const that = this;
-        this._process.stdout.on('data', function(chunk) {
+        this._process.stdout.on('data', chunk => {
             that._output += chunk.toString('utf8');
         });
         if (pipeStderr) {
@@ -104,8 +103,8 @@ class LusterInstance {
 
         // Promise is resolved when master process replies to ping
         // Promise is rejected if master was unable to reply to ping within 1 second
-        return new Promise(function(resolve, reject) {
-            instance.once('message', function(message) {
+        return new Promise((resolve, reject) => {
+            instance.once('message', message => {
                 if (message === 'ready') {
                     resolve(res);
                 } else {
@@ -123,7 +122,7 @@ class LusterInstance {
      */
     sendWaitTimeout(message, timeout) {
         const self = this;
-        return new Promise(function(resolve) {
+        return new Promise(resolve => {
             self._process.send(message);
             setTimeout(resolve, timeout);
         });
@@ -138,9 +137,9 @@ class LusterInstance {
      */
     sendWaitAnswer(message, expectedAnswer) {
         const self = this;
-        return new Promise(function(resolve, reject) {
+        return new Promise((resolve, reject) => {
             self._process.send(message);
-            self._process.once('message', function(answer) {
+            self._process.once('message', answer => {
                 if (answer === expectedAnswer) {
                     resolve();
                 } else {
@@ -158,8 +157,8 @@ class LusterInstance {
      */
     waitAnswer(expectedAnswer) {
         const self = this;
-        return new Promise(function(resolve, reject) {
-            self._process.once('message', function(answer) {
+        return new Promise((resolve, reject) => {
+            self._process.once('message', answer => {
                 if (answer === expectedAnswer) {
                     resolve();
                 } else {

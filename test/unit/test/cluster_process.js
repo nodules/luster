@@ -12,28 +12,24 @@ class TestClusterProcess extends ClusterProcess {
     _setupIPCMessagesHandler() {}
 }
 
-describe('ClusterProcess', function() {
+describe('ClusterProcess', () => {
     let clusterProcess;
     const sandbox = sinon.sandbox.create();
 
-    afterEach(function() {
-        sandbox.restore();
-    });
+    afterEach(() => sandbox.restore());
 
-    describe('configure', function() {
+    describe('configure', () => {
         let config;
 
-        beforeEach(function () {
+        beforeEach(() => {
             clusterProcess = new TestClusterProcess();
             config = Object.assign({}, fixturesConf, true);
-            clusterProcess.addListener('error', function () {});
+            clusterProcess.addListener('error', () => {});
         });
 
-        afterEach(function () {
-            clusterProcess.removeAllListeners('error');
-        });
+        afterEach(() => clusterProcess.removeAllListeners('error'));
 
-        it('should emit "configured" event on configuration success', function () {
+        it('should emit "configured" event on configuration success', () => {
             const spy = sandbox.spy();
 
             clusterProcess.on('configured', spy);
@@ -42,7 +38,7 @@ describe('ClusterProcess', function() {
             assert.calledOnce(spy);
         });
 
-        it('should emit "error" event for malformed config', function () {
+        it('should emit "error" event for malformed config', () => {
             const spy = sandbox.spy();
 
             clusterProcess.on('error', spy);
@@ -51,7 +47,7 @@ describe('ClusterProcess', function() {
             assert.calledOnce(spy);
         });
 
-        it('should not apply env config if overriding is explicitly turned off', function() {
+        it('should not apply env config if overriding is explicitly turned off', () => {
             process.env.LUSTER_CONF = 'workers=1';
 
             clusterProcess.configure(config, false);
@@ -59,7 +55,7 @@ describe('ClusterProcess', function() {
             assert.strictEqual(clusterProcess.config.get('workers'), 10);
         });
 
-        it('should run checkConfiguration after applyEnv', function() {
+        it('should run checkConfiguration after applyEnv', () => {
             const applyEnv = sandbox.spy(Configuration, 'applyEnvironment'),
                 check = sandbox.spy(Configuration, 'check');
             clusterProcess.configure(config);

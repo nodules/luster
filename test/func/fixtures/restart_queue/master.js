@@ -16,14 +16,12 @@ proc
 function restart() {
     console.log('restarting');
     proc.softRestart();
-    proc.once('restarted', function() {
-        process.send('restarted');
-    });
+    proc.once('restarted', () => process.send('restarted'));
 }
 
 function killFirstWorker() {
     const firstWorker = proc.getWorkersArray()[0];
-    firstWorker.on('state', function(state) {
+    firstWorker.on('state', state => {
         // force dead state
         if (state === WorkerWrapper.STATES.LAUNCHING) {
             firstWorker.stop();
@@ -40,15 +38,11 @@ function killThirdWorker() {
 }
 
 if (proc.isMaster) {
-    proc.once('running', function() {
-        process.send('ready');
-    });
+    proc.once('running', () => process.send('ready'));
 
-    proc.on('worker exit', function(worker) {
-        console.log('exit', worker.wid);
-    });
+    proc.on('worker exit', worker => console.log('exit', worker.wid));
 
-    process.on('message', function(command) {
+    process.on('message', command => {
         switch (command) {
         case 'restart':
             restart();

@@ -12,7 +12,5 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.once('running', function() {
-        process.send('ready');
-    });
+    proc.once('running', () => process.send('ready'));
 }

@@ -11,38 +11,28 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.once('running', function() {
-        process.send('ready');
-    });
-    process.on('message', function(message) {
+    proc.once('running', () => process.send('ready'));
+    process.on('message', message => {
         switch (message) {
         case 'hang':
             proc.remoteCallToAll('hang');
             break;
         case 'disconnect and hang':
             proc.remoteCallToAll('disconnect and hang');
-            proc.once('worker disconnect', function() {
-                process.send('disconnected');
-            });
+            proc.once('worker disconnect', () => process.send('disconnected'));
             break;
         case 'wait worker':
-            proc.once('worker ready', function() {
-                process.send('worker ready');
-            });
+            proc.once('worker ready', () => process.send('worker ready'));
             break;
         case 'request':
             proc.remoteCallToAllWithCallback({
                 command: 'request',
-                callback: function(worker, something, response) {
-                    process.send(response);
-                }
+                callback: (worker, something, response) => process.send(response)
             });
             break;
         case 'restart':
             proc.restart();
-            proc.once('restarted', function() {
-                process.send('restarted');
-            });
+            proc.once('restarted', () => process.send('restarted'));
             break;
         }
     });

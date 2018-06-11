@@ -17,11 +17,7 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.once('running', function() {
-        process.send('ready');
-    });
+    proc.once('running', () => process.send('ready'));
 
-    proc.once('initialized', function() {
-        console.log('master is initialized');
-    });
+    proc.once('initialized', () => console.log('master is initialized'));
 }

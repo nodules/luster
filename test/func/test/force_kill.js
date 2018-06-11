@@ -3,30 +3,28 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
-describe('stopTimeout', function() {
+describe('stopTimeout', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
         return LusterInstance
             .run('../fixtures/force_kill/master.js')
-            .then(function (inst) {
-                instance = inst;
-            });
+            .then(inst => instance = inst);
     });
 
-    it('should kill infinite worker', function() {
-        return instance.sendWaitTimeout('hang', 10)
-            .then(function() { return instance.sendWaitAnswer('restart', 'restarted'); })
-            .then(function() { return instance.sendWaitAnswer('request', 'response'); });
-    });
+    it('should kill infinite worker', () =>
+        instance.sendWaitTimeout('hang', 10)
+            .then(() => instance.sendWaitAnswer('restart', 'restarted'))
+            .then(() => instance.sendWaitAnswer('request', 'response'))
+    );
 
-    it('should kill infinite worker that disconnected itself', function() {
-        return instance.sendWaitAnswer('disconnect and hang', 'disconnected')
-            .then(function() { return instance.sendWaitAnswer('wait worker', 'worker ready'); })
-            .then(function() { return instance.sendWaitAnswer('request', 'response'); });
-    });
+    it('should kill infinite worker that disconnected itself', () =>
+        instance.sendWaitAnswer('disconnect and hang', 'disconnected')
+            .then(() => instance.sendWaitAnswer('wait worker', 'worker ready'))
+            .then(() => instance.sendWaitAnswer('request', 'response'))
+    );
 
-    afterEach(function() {
+    afterEach(() => {
         if (instance) {
             instance.kill();
             instance = null;

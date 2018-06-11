@@ -11,12 +11,12 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.once('running', function() {
+    proc.once('running', () => {
         process.send('ready');
         const worker = proc.getWorkersArray()[0];
         worker.remoteCallWithCallback({
             command: 'test',
-            callback: function (worker, error, response) {
+            callback: (worker, error, response) => {
                 console.log(response);
                 worker.remoteCall('test 2', '2');
             },
