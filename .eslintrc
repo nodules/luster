@@ -9,6 +9,7 @@
     "global-require": 0
   },
   "env": {
+    "es6": true,
     "node": true,
     "mocha": true
   },
