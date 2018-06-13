@@ -31,6 +31,7 @@ describe('restart queue', () => {
         const expected = [
             'restarting',
             'exit 1',
+            'run 1',
             'dead 1',
             'exit 1',
             'exit 2',
