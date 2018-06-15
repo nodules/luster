@@ -36,7 +36,6 @@
     }
   ],
   "dependencies": {
-    "extend": "^3.0.0",
     "terror": "^1.0.0"
   },
   "devDependencies": {
