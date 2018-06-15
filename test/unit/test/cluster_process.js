@@ -9,8 +9,9 @@ const ClusterProcess = require('../../../lib/cluster_process'),
  * ClusterProcess is an abstract class, it cannot be instantiated for tests;
  * TestClusterProcess is a smalles possible descendant of ClusterProcess;
  */
-const TestClusterProcess = ClusterProcess.create(function TestClusterProcess() {});
-TestClusterProcess.prototype._setupIPCMessagesHandler = function() {};
+class TestClusterProcess extends ClusterProcess {
+    _setupIPCMessagesHandler() {}
+}
 
 describe('ClusterProcess', function() {
     let clusterProcess;
