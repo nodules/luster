@@ -1,10 +1,10 @@
 /* globals describe,it,before,after,assert */
 'use strict';
 
-var LusterInstance = require('../helpers/luster_instance');
+const LusterInstance = require('../helpers/luster_instance');
 
 describe('emitToAll', function() {
-    var instance;
+    let instance;
 
     beforeEach(function() {
         return LusterInstance

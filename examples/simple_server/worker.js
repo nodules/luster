@@ -1,4 +1,4 @@
-var http = require('http'),
+const http = require('http'),
     worker = require('luster');
 
 if (worker.wid === 1 || worker.wid === 0) {

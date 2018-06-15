@@ -1,10 +1,10 @@
 /* globals describe,it,before,after,assert */
 'use strict';
 
-var LusterInstance = require('../helpers/luster_instance');
+const LusterInstance = require('../helpers/luster_instance');
 
 describe('restart queue', function() {
-    var instance;
+    let instance;
 
     beforeEach(function() {
         return LusterInstance
@@ -15,7 +15,7 @@ describe('restart queue', function() {
     });
 
     it('should restart workers one by one', function() {
-        var expected = [
+        const expected = [
             'restarting',
             'exit 1',
             'run 1',
@@ -30,7 +30,7 @@ describe('restart queue', function() {
     });
 
     it('should continue if restarted worker became dead', function() {
-        var expected = [
+        const expected = [
             'restarting',
             'exit 1',
             'dead 1',
@@ -47,7 +47,7 @@ describe('restart queue', function() {
 
     it('should remove self-restarted worker from queue', function() {
         // Exit/run order of workers is not well-defined, so the only way is to compare sorted log lines
-        var expected = [
+        const expected = [
             'restarting',
             'exit 1',
             'run 1',
@@ -58,7 +58,7 @@ describe('restart queue', function() {
             ''
         ].sort();
         return instance.sendWaitAnswer('restartKillThird', 'restarted').then(function() {
-            var output = instance.output().split('\n').slice(-expected.length).sort().join('\n');
+            const output = instance.output().split('\n').slice(-expected.length).sort().join('\n');
             assert.equal(output, expected.join('\n'));
         });
     });

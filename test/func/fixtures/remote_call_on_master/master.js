@@ -1,4 +1,4 @@
-var proc = require('luster');
+const proc = require('luster');
 
 proc
     .configure({
@@ -13,7 +13,7 @@ proc
 if (proc.isMaster) {
     proc.once('running', function() {
         process.send('ready');
-        var worker = proc.getWorkersArray()[0];
+        const worker = proc.getWorkersArray()[0];
         worker.remoteCallWithCallback({
             command: 'test',
             callback: function (worker, error, response) {
