@@ -98,7 +98,7 @@ class LusterInstance {
         if (typeof(env) === 'boolean') {
             pipeStderr = env;
         }
-        const instance = fork(path.resolve(__dirname, name), {env: env, silent: true});
+        const instance = fork(path.resolve(__dirname, name), {env, silent: true});
         const res = new LusterInstance(instance, pipeStderr);
 
         // Promise is resolved when master process replies to ping
