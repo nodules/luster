@@ -3,25 +3,23 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
-describe('remote calls on master', function() {
+describe('remote calls on master', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
         return LusterInstance
             .run('../fixtures/remote_call_on_master/master.js')
-            .then(function (inst) {
-                instance = inst;
-            });
+            .then(inst => instance = inst);
     });
 
-    it('should allow master to call worker', function(done) {
-        setTimeout(function() {
+    it('should allow master to call worker', done => {
+        setTimeout(() => {
             assert.equal(instance.output(), '1\n2\n');
             done();
         }, 100);
     });
 
-    afterEach(function() {
+    afterEach(() => {
         if (instance) {
             instance.kill();
             instance = null;

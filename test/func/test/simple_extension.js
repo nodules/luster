@@ -3,18 +3,16 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
-describe('simple extension', function() {
+describe('simple extension', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
         return LusterInstance
             .run('../fixtures/simple_extension/master.js')
-            .then(function (inst) {
-                instance = inst;
-            });
+            .then(inst => instance = inst);
     });
 
-    it('should have access to configuration', function(done) {
+    it('should have access to configuration', done => {
         const expected = [
             'luster-simple extension configured on master process',
             'param1 = 1',
@@ -23,13 +21,13 @@ describe('simple extension', function() {
             'param1 = 1',
             'param2 = World\n'
         ].join('\n');
-        setTimeout(function() {
+        setTimeout(() => {
             assert.equal(instance.output(), expected);
             done();
         }, 100);
     });
 
-    afterEach(function() {
+    afterEach(() => {
         if (instance) {
             instance.kill();
             instance = null;

@@ -1,5 +1,3 @@
 const worker = require('luster');
 
-worker.on('master log', function(data) {
-    console.log(data);
-});
+worker.on('master log', data => console.log(data));

@@ -3,23 +3,21 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
-describe('LUSTER_CONF env variable', function() {
+describe('LUSTER_CONF env variable', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
         return LusterInstance
-            .run('../fixtures/override_config/master.js', { LUSTER_CONF: 'test=good' } )
-            .then(function (inst) {
-                instance = inst;
-            });
+            .run('../fixtures/override_config/master.js', {LUSTER_CONF: 'test=good'})
+            .then(inst => instance = inst);
     });
 
-    it('should override config', function() {
+    it('should override config', () => {
         return instance.waitAnswer('master - good')
-            .then(function() { return instance.waitAnswer('worker - good'); } );
+            .then(() => instance.waitAnswer('worker - good'));
     });
 
-    afterEach(function() {
+    afterEach(() => {
         if (instance) {
             instance.kill();
             instance = null;

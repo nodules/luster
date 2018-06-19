@@ -9,26 +9,22 @@ const Configuration = require('../../../lib/configuration'),
     has = helpers.has;
 
 // suppress stderr from terror
-LusterConfigurationError.setLogger(function() {});
+LusterConfigurationError.setLogger(() => {});
 
-describe('Configuration', function() {
+describe('Configuration', () => {
     let configuration;
     const sandbox = sinon.sandbox.create();
 
-    afterEach(function() {
+    afterEach(() => {
         sandbox.restore();
     });
 
-    describe('applyEnvironment', function() {
-        beforeEach(function() {
-            configuration = Object.assign({}, fixturesConf, true);
-        });
+    describe('applyEnvironment', () => {
+        beforeEach(() => configuration = Object.assign({}, fixturesConf, true));
 
-        afterEach(function() {
-            delete process.env.LUSTER_CONF;
-        });
+        afterEach(() => delete process.env.LUSTER_CONF);
 
-        it('should do simple one-level override', function() {
+        it('should do simple one-level override', () => {
             process.env.LUSTER_CONF = 'workers=1';
 
             Configuration.applyEnvironment(configuration);
@@ -36,7 +32,7 @@ describe('Configuration', function() {
             assert.strictEqual(configuration.workers, 1);
         });
 
-        it('should override to undefined value via empty string', function() {
+        it('should override to undefined value via empty string', () => {
             process.env.LUSTER_CONF = 'foo=';
 
             Configuration.applyEnvironment(configuration);
@@ -44,7 +40,7 @@ describe('Configuration', function() {
             assert.isUndefined(configuration.foo);
         });
 
-        it('should do nothing when only propname is provided', function() {
+        it('should do nothing when only propname is provided', () => {
             process.env.LUSTER_CONF = 'foo';
 
             Configuration.applyEnvironment(configuration);
@@ -52,7 +48,7 @@ describe('Configuration', function() {
             assert.strictEqual(configuration.foo, true);
         });
 
-        it('should respect semicolon in quoted property value', function() {
+        it('should respect semicolon in quoted property value', () => {
             process.env.LUSTER_CONF = 'foo="baz;"';
 
             Configuration.applyEnvironment(configuration);
@@ -60,7 +56,7 @@ describe('Configuration', function() {
             assert.strictEqual(configuration.foo, 'baz;');
         });
 
-        it('should respect equality sign in quoted property value', function() {
+        it('should respect equality sign in quoted property value', () => {
             process.env.LUSTER_CONF = 'foo="baz=bar"';
 
             Configuration.applyEnvironment(configuration);
@@ -68,7 +64,7 @@ describe('Configuration', function() {
             assert.strictEqual(configuration.foo, 'baz=bar');
         });
 
-        it('should parse json from propval', function() {
+        it('should parse json from propval', () => {
             process.env.LUSTER_CONF = 'properties={"foo":true,"baz":"bar"}';
 
             Configuration.applyEnvironment(configuration);
@@ -77,14 +73,14 @@ describe('Configuration', function() {
             assert.strictEqual(configuration.properties.baz, 'bar');
         });
 
-        it('should throw when trying to set inner property to a scalar property', function() {
+        it('should throw when trying to set inner property to a scalar property', () => {
             process.env.LUSTER_CONF = 'baz.foo.bar=true';
 
-            assert.throws(function() { Configuration.applyEnvironment(configuration); },
+            assert.throws(() => Configuration.applyEnvironment(configuration),
                 'LusterConfigurationError: Property "baz.foo" already exists and is not an object');
         });
 
-        it('should do second-level nested property override', function() {
+        it('should do second-level nested property override', () => {
             process.env.LUSTER_CONF = 'server.port=8080';
 
             Configuration.applyEnvironment(configuration);
@@ -92,7 +88,7 @@ describe('Configuration', function() {
             assert.strictEqual(configuration.server.port, 8080);
         });
 
-        it('should do deep nested property override', function() {
+        it('should do deep nested property override', () => {
             process.env.LUSTER_CONF = 'properties.foo.bar.baz=true';
 
             Configuration.applyEnvironment(configuration);
@@ -100,8 +96,8 @@ describe('Configuration', function() {
             assert.strictEqual(configuration.properties.foo.bar.baz, true);
         });
 
-        describe('should override multiple properties at once', function() {
-            it('should respect semicolon separated values', function() {
+        describe('should override multiple properties at once', () => {
+            it('should respect semicolon separated values', () => {
                 process.env.LUSTER_CONF = 'workers=1;foo=false';
 
                 Configuration.applyEnvironment(configuration);
@@ -110,7 +106,7 @@ describe('Configuration', function() {
                 assert.strictEqual(configuration.foo, false);
             });
 
-            it('whitespaces should not matter', function() {
+            it('whitespaces should not matter', () => {
                 process.env.LUSTER_CONF = 'workers = 1; foo =false';
 
                 Configuration.applyEnvironment(configuration);
@@ -121,16 +117,16 @@ describe('Configuration', function() {
         });
     });
 
-    describe('check', function() {
-        it('should emit error when trying to override non-string property with a string', function() {
+    describe('check', () => {
+        it('should emit error when trying to override non-string property with a string', () => {
             configuration.workers = 'some';
 
             assert.strictEqual(Configuration.check(configuration), 1);
         });
     });
 
-    describe('set helper', function() {
-        it('should set first level property', function() {
+    describe('set helper', () => {
+        it('should set first level property', () => {
             const ctx = {};
 
             set(ctx, 'prop', 123);
@@ -138,7 +134,7 @@ describe('Configuration', function() {
             assert.strictEqual(ctx.prop, 123);
         });
 
-        it('should set deeply nested property', function() {
+        it('should set deeply nested property', () => {
             const ctx = { a: { b: { c: 1 } } };
 
             set(ctx, 'a.b.c', 2);
@@ -146,7 +142,7 @@ describe('Configuration', function() {
             assert.strictEqual(ctx.a.b.c, 2);
         });
 
-        it('should set deeply nested undefined property', function() {
+        it('should set deeply nested undefined property', () => {
             const ctx = {};
 
             set(ctx, 'a.b.c', 2);
@@ -154,14 +150,14 @@ describe('Configuration', function() {
             assert.strictEqual(ctx.a.b.c, 2);
         });
 
-        it('should fail to set nested property of scalar', function() {
+        it('should fail to set nested property of scalar', () => {
             const ctx = {a: 'hello'};
 
-            assert.throws(function() { set(ctx, 'a.b', 2); },
+            assert.throws(() => set(ctx, 'a.b', 2),
                 'LusterConfigurationError: Property "a" already exists and is not an object');
         });
 
-        it('should override complex property with a scalar value', function() {
+        it('should override complex property with a scalar value', () => {
             const ctx = { server: { a: 'b' } };
 
             set(ctx, 'server', true);
@@ -169,14 +165,14 @@ describe('Configuration', function() {
             assert.strictEqual(ctx.server, true);
         });
 
-        it('should fail to set element of array', function() {
+        it('should fail to set element of array', () => {
             const ctx = {a: [1, 2, 3]};
 
-            assert.throws(function() { set(ctx, 'a.1', 5); },
+            assert.throws(() => set(ctx, 'a.1', 5),
                 'LusterConfigurationError: Property "a" already exists and is not an object');
         });
 
-        it('should override getters', function() {
+        it('should override getters', () => {
             const ctx = {
                 get stderr() {
                     return './error.log';
@@ -189,40 +185,40 @@ describe('Configuration', function() {
         });
     });
 
-    describe('get helper', function() {
-        it('should get first level property', function() {
+    describe('get helper', () => {
+        it('should get first level property', () => {
             const ctx = { prop: 123 };
 
             assert.strictEqual(get(ctx, 'prop'), 123);
         });
 
-        it('should return default for missing property', function() {
+        it('should return default for missing property', () => {
             assert.strictEqual(get({}, 'prop', 123), 123);
         });
 
-        it('should get deeply nested property', function() {
+        it('should get deeply nested property', () => {
             const ctx = { a: { b: { c: 1 } } };
 
             assert.strictEqual(get(ctx, 'a.b.c'), 1);
         });
 
-        it('should return default for missing nested property', function() {
+        it('should return default for missing nested property', () => {
             assert.strictEqual(get({}, 'a.b.c', 2), 2);
         });
 
-        it('should return default for nested property of scalar', function() {
+        it('should return default for nested property of scalar', () => {
             const ctx = { a: 'qqq' };
 
             assert.strictEqual(get(ctx, 'a.b', 2), 2);
         });
 
-        it('should return complex property', function() {
+        it('should return complex property', () => {
             const ctx = { server: { a: 'b' } };
 
             assert.strictEqual(get(ctx, 'server'), ctx.server);
         });
 
-        it('should return value of getters', function() {
+        it('should return value of getters', () => {
             const ctx = {
                 get stderr() {
                     return './error.log';
@@ -233,42 +229,42 @@ describe('Configuration', function() {
         });
     });
 
-    describe('has helper', function() {
-        it('should find first level property', function() {
+    describe('has helper', () => {
+        it('should find first level property', () => {
             const ctx = { prop: 123 };
 
             assert.strictEqual(has(ctx, 'prop'), true);
         });
 
-        it('should find complex property', function() {
+        it('should find complex property', () => {
             const ctx = { server: { a: 'b' } };
 
             assert.strictEqual(has(ctx, 'server'), true);
         });
 
-        it('should not find for missing property', function() {
+        it('should not find for missing property', () => {
             assert.strictEqual(has({}, 'prop'), false);
         });
 
-        it('should get deeply nested property', function() {
+        it('should get deeply nested property', () => {
             const ctx = { a: { b: { c: 1 } } };
 
             assert.strictEqual(has(ctx, 'a.b.c'), true);
         });
 
-        it('should not find missing nested property', function() {
+        it('should not find missing nested property', () => {
             const ctx = {a: {}};
 
             assert.strictEqual(has(ctx, 'a.b.c'), false);
         });
 
-        it('should not find nested property of scalar', function() {
+        it('should not find nested property of scalar', () => {
             const ctx = { a: 'qqq' };
 
             assert.strictEqual(has(ctx, 'a.b', 2), false);
         });
 
-        it('should find getters', function() {
+        it('should find getters', () => {
             const ctx = {
                 get stderr() {
                     return './error.log';

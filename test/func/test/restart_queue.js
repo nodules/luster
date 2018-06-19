@@ -3,18 +3,16 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
-describe('restart queue', function() {
+describe('restart queue', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
         return LusterInstance
             .run('../fixtures/restart_queue/master.js', false)
-            .then(function (inst) {
-                instance = inst;
-            });
+            .then(inst => instance = inst);
     });
 
-    it('should restart workers one by one', function() {
+    it('should restart workers one by one', () => {
         const expected = [
             'restarting',
             'exit 1',
@@ -24,12 +22,12 @@ describe('restart queue', function() {
             'exit 3',
             'run 3\n'
         ].join('\n');
-        return instance.sendWaitAnswer('restart', 'restarted').then(function() {
+        return instance.sendWaitAnswer('restart', 'restarted').then(() => {
             assert(instance.output().endsWith(expected), 'Output should end with ' + expected);
         });
     });
 
-    it('should continue if restarted worker became dead', function() {
+    it('should continue if restarted worker became dead', () => {
         const expected = [
             'restarting',
             'exit 1',
@@ -40,12 +38,12 @@ describe('restart queue', function() {
             'exit 3',
             'run 3\n'
         ].join('\n');
-        return instance.sendWaitAnswer('restartKillFirst', 'restarted').then(function() {
+        return instance.sendWaitAnswer('restartKillFirst', 'restarted').then(() => {
             assert(instance.output().endsWith(expected), 'Output should end with ' + expected);
         });
     });
 
-    it('should remove self-restarted worker from queue', function() {
+    it('should remove self-restarted worker from queue', () => {
         // Exit/run order of workers is not well-defined, so the only way is to compare sorted log lines
         const expected = [
             'restarting',
@@ -57,13 +55,13 @@ describe('restart queue', function() {
             'run 2',
             ''
         ].sort();
-        return instance.sendWaitAnswer('restartKillThird', 'restarted').then(function() {
+        return instance.sendWaitAnswer('restartKillThird', 'restarted').then(() => {
             const output = instance.output().split('\n').slice(-expected.length).sort().join('\n');
             assert.equal(output, expected.join('\n'));
         });
     });
 
-    afterEach(function() {
+    afterEach(() => {
         if (instance) {
             instance.kill();
             instance = null;

@@ -3,18 +3,16 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
-describe('async extension', function() {
+describe('async extension', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
         return LusterInstance
             .run('../fixtures/async_extension/master.js')
-            .then(function (inst) {
-                instance = inst;
-            });
+            .then(inst => instance = inst);
     });
 
-    it('should have access to configuration and delay initialized event', function(done) {
+    it('should have access to configuration and delay initialized event', done => {
         const expected = [
             'luster-async extension configured on master process',
             'param1 = 2',
@@ -25,13 +23,13 @@ describe('async extension', function() {
             'param2 = Hello',
             'worker process #1 has started\n'
         ].join('\n');
-        setTimeout(function() {
+        setTimeout(() => {
             assert.equal(instance.output(), expected);
             done();
         }, 100);
     });
 
-    afterEach(function() {
+    afterEach(() => {
         if (instance) {
             instance.kill();
             instance = null;

@@ -1,3 +1,3 @@
 const worker = require('luster');
 
-setTimeout(worker.ready.bind(worker), 500);
+setTimeout(() => worker.ready(), 500);

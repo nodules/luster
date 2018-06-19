@@ -10,13 +10,13 @@ counters[worker.id] = 0;
 
 worker.registerRemoteCommand(
     'updateCounter',
-    function(target, workerId, value) {
+    (target, workerId, value) => {
         // update recieved counter
         counters[workerId] = value;
     });
 
 http
-    .createServer(function(req, res) {
+    .createServer((req, res) => {
         res.end('Worker #' + worker.id + ' at your service, sir!\n\nCounters: ' + JSON.stringify(counters));
 
         // update counter in another workers

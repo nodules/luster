@@ -11,7 +11,7 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.once('running', function() {
+    proc.once('running', () => {
         process.send('ready');
         proc.emitToAll('log', 'test');
     });

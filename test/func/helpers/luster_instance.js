@@ -1,4 +1,3 @@
-/* globals Promise */
 /**
  * @module test/func/runner
  *
@@ -79,9 +78,8 @@ class LusterInstance {
 
         this._process = child;
         this._output = '';
-        const that = this;
-        this._process.stdout.on('data', function(chunk) {
-            that._output += chunk.toString('utf8');
+        this._process.stdout.on('data', chunk => {
+            this._output += chunk.toString('utf8');
         });
         if (pipeStderr) {
             this._process.stderr.pipe(process.stderr, {end: false});
@@ -99,13 +97,13 @@ class LusterInstance {
         if (typeof(env) === 'boolean') {
             pipeStderr = env;
         }
-        const instance = fork(path.resolve(__dirname, name), {env: env, silent: true});
+        const instance = fork(path.resolve(__dirname, name), {env, silent: true});
         const res = new LusterInstance(instance, pipeStderr);
 
         // Promise is resolved when master process replies to ping
         // Promise is rejected if master was unable to reply to ping within 1 second
-        return new Promise(function(resolve, reject) {
-            instance.once('message', function(message) {
+        return new Promise((resolve, reject) => {
+            instance.once('message', message => {
                 if (message === 'ready') {
                     resolve(res);
                 } else {
@@ -122,9 +120,8 @@ class LusterInstance {
      * @returns {Promise}
      */
     sendWaitTimeout(message, timeout) {
-        const self = this;
-        return new Promise(function(resolve) {
-            self._process.send(message);
+        return new Promise(resolve => {
+            this._process.send(message);
             setTimeout(resolve, timeout);
         });
     }
@@ -137,10 +134,9 @@ class LusterInstance {
      * @returns {Promise}
      */
     sendWaitAnswer(message, expectedAnswer) {
-        const self = this;
-        return new Promise(function(resolve, reject) {
-            self._process.send(message);
-            self._process.once('message', function(answer) {
+        return new Promise((resolve, reject) => {
+            this._process.send(message);
+            this._process.once('message', answer => {
                 if (answer === expectedAnswer) {
                     resolve();
                 } else {
@@ -157,9 +153,8 @@ class LusterInstance {
      * @returns {Promise}
      */
     waitAnswer(expectedAnswer) {
-        const self = this;
-        return new Promise(function(resolve, reject) {
-            self._process.once('message', function(answer) {
+        return new Promise((resolve, reject) => {
+            this._process.once('message', answer => {
                 if (answer === expectedAnswer) {
                     resolve();
                 } else {

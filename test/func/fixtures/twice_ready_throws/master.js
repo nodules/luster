@@ -15,7 +15,5 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.registerRemoteCommand('already_ready', function() {
-        process.send('already_ready');
-    });
+    proc.registerRemoteCommand('already_ready', () => process.send('already_ready'));
 }

@@ -1,5 +1,3 @@
 const worker = require('luster');
 
-worker.registerRemoteCommandWithCallback('test', function(callback) {
-    callback(worker.config.get('test'));
-});
+worker.registerRemoteCommandWithCallback('test', callback => callback(worker.config.get('test')));

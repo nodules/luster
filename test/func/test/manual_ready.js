@@ -1,20 +1,20 @@
-/* globals describe,it,before,after,Promise,assert */
+/* globals describe,it,before,after,assert */
 'use strict';
 
 const fork = require('child_process').fork,
     path = require('path');
 
-describe('manualReady option', function() {
+describe('manualReady option', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
         instance = fork(path.resolve(__dirname, '../fixtures/manual_ready/master.js'));
     });
 
-    it('should fire running when workers are ready', function() {
-        return new Promise(function(resolve) {
+    it('should fire running when workers are ready', () => {
+        return new Promise(resolve => {
             const start = process.hrtime();
-            instance.once('message', function(message) {
+            instance.once('message', message => {
                 assert.equal(message, 'ready', 'Got unexpected response from server');
                 const hrTimeDiff = process.hrtime(start);
                 const diff = hrTimeDiff[0] + hrTimeDiff[1] / 1e9;
@@ -24,7 +24,5 @@ describe('manualReady option', function() {
         });
     });
 
-    afterEach(function() {
-        instance.kill();
-    });
+    afterEach(() => instance.kill());
 });
