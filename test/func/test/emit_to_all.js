@@ -6,10 +6,9 @@ const LusterInstance = require('../helpers/luster_instance');
 describe('emitToAll', () => {
     let instance;
 
-    beforeEach(() => {
-        return LusterInstance
-            .run('../fixtures/emit_to_all/master.js')
-            .then(inst => instance = inst);
+    beforeEach(async () => {
+        instance = await LusterInstance
+            .run('../fixtures/emit_to_all/master.js');
     });
 
     it('should deliver message data to all workers', done => {

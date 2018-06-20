@@ -78,8 +78,9 @@ class LusterInstance {
 
         this._process = child;
         this._output = '';
+        this._process.stdout.setEncoding('utf8');
         this._process.stdout.on('data', chunk => {
-            this._output += chunk.toString('utf8');
+            this._output += chunk;
         });
         if (pipeStderr) {
             this._process.stderr.pipe(process.stderr, {end: false});

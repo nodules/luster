@@ -6,10 +6,9 @@ const LusterInstance = require('../helpers/luster_instance');
 describe('async extension', () => {
     let instance;
 
-    beforeEach(() => {
-        return LusterInstance
-            .run('../fixtures/async_extension/master.js')
-            .then(inst => instance = inst);
+    beforeEach(async () => {
+        instance = await LusterInstance
+            .run('../fixtures/async_extension/master.js');
     });
 
     it('should have access to configuration and delay initialized event', done => {

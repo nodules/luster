@@ -6,15 +6,14 @@ const LusterInstance = require('../helpers/luster_instance');
 describe('LUSTER_CONF env variable', () => {
     let instance;
 
-    beforeEach(() => {
-        return LusterInstance
-            .run('../fixtures/override_config/master.js', {LUSTER_CONF: 'test=good'})
-            .then(inst => instance = inst);
+    beforeEach(async () => {
+        instance = await LusterInstance
+            .run('../fixtures/override_config/master.js', {LUSTER_CONF: 'test=good'});
     });
 
-    it('should override config', () => {
-        return instance.waitAnswer('master - good')
-            .then(() => instance.waitAnswer('worker - good'));
+    it('should override config', async () => {
+        await instance.waitAnswer('master - good');
+        await instance.waitAnswer('worker - good');
     });
 
     afterEach(() => {
