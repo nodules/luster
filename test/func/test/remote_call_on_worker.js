@@ -6,10 +6,9 @@ const LusterInstance = require('../helpers/luster_instance');
 describe('remote calls on worker', () => {
     let instance;
 
-    beforeEach(() => {
-        return LusterInstance
-            .run('../fixtures/remote_call_on_worker/master.js')
-            .then(inst => instance = inst);
+    beforeEach(async () => {
+        instance = await LusterInstance
+            .run('../fixtures/remote_call_on_worker/master.js');
     });
 
     it('should allow worker to call master', done => {

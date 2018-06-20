@@ -6,13 +6,12 @@ const LusterInstance = require('../helpers/luster_instance');
 describe('restart queue', () => {
     let instance;
 
-    beforeEach(() => {
-        return LusterInstance
-            .run('../fixtures/restart_queue/master.js', false)
-            .then(inst => instance = inst);
+    beforeEach(async () => {
+        instance = await LusterInstance
+            .run('../fixtures/restart_queue/master.js', false);
     });
 
-    it('should restart workers one by one', () => {
+    it('should restart workers one by one', async () => {
         const expected = [
             'restarting',
             'exit 1',
@@ -22,12 +21,13 @@ describe('restart queue', () => {
             'exit 3',
             'run 3\n'
         ].join('\n');
-        return instance.sendWaitAnswer('restart', 'restarted').then(() => {
-            assert(instance.output().endsWith(expected), 'Output should end with ' + expected);
-        });
+
+        await instance.sendWaitAnswer('restart', 'restarted');
+
+        assert(instance.output().endsWith(expected), 'Output should end with ' + expected);
     });
 
-    it('should continue if restarted worker became dead', () => {
+    it('should continue if restarted worker became dead', async () => {
         const expected = [
             'restarting',
             'exit 1',
@@ -39,12 +39,13 @@ describe('restart queue', () => {
             'exit 3',
             'run 3\n'
         ].join('\n');
-        return instance.sendWaitAnswer('restartKillFirst', 'restarted').then(() => {
-            assert(instance.output().endsWith(expected), 'Output should end with ' + expected);
-        });
+
+        await instance.sendWaitAnswer('restartKillFirst', 'restarted');
+
+        assert(instance.output().endsWith(expected), 'Output should end with ' + expected);
     });
 
-    it('should remove self-restarted worker from queue', () => {
+    it('should remove self-restarted worker from queue', async () => {
         // Exit/run order of workers is not well-defined, so the only way is to compare sorted log lines
         const expected = [
             'restarting',
@@ -56,10 +57,11 @@ describe('restart queue', () => {
             'run 2',
             ''
         ].sort();
-        return instance.sendWaitAnswer('restartKillThird', 'restarted').then(() => {
-            const output = instance.output().split('\n').slice(-expected.length).sort().join('\n');
-            assert.equal(output, expected.join('\n'));
-        });
+
+        await instance.sendWaitAnswer('restartKillThird', 'restarted');
+
+        const output = instance.output().split('\n').slice(-expected.length).sort().join('\n');
+        assert.equal(output, expected.join('\n'));
     });
 
     afterEach(() => {

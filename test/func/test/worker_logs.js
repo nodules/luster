@@ -6,10 +6,9 @@ const LusterInstance = require('../helpers/luster_instance');
 describe('worker logs', () => {
     let instance;
 
-    beforeEach(() => {
-        return LusterInstance
-            .run('../fixtures/worker_logs/master.js', {NODE_DEBUG: 'luster:eex'})
-            .then(inst => instance = inst);
+    beforeEach(async () => {
+        instance = await LusterInstance
+            .run('../fixtures/worker_logs/master.js', {NODE_DEBUG: 'luster:eex'});
     });
 
     it('should use constant id even after restart', done => {

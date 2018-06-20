@@ -6,10 +6,9 @@ const LusterInstance = require('../helpers/luster_instance');
 describe('simple extension', () => {
     let instance;
 
-    beforeEach(() => {
-        return LusterInstance
-            .run('../fixtures/simple_extension/master.js')
-            .then(inst => instance = inst);
+    beforeEach(async () => {
+        instance = await LusterInstance
+            .run('../fixtures/simple_extension/master.js');
     });
 
     it('should have access to configuration', done => {
