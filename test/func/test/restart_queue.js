@@ -3,6 +3,12 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
+function containInOrder(patterns, test) {
+    // . in regexp does not match \n, using [^]
+    const re = new RegExp(patterns.join('[^]*'));
+    return test.match(re) !== null;
+}
+
 describe('restart queue', () => {
     let instance;
 
@@ -31,18 +37,17 @@ describe('restart queue', () => {
         const expected = [
             'restarting',
             'exit 1',
-            'run 1',
             'dead 1',
             'exit 1',
             'exit 2',
             'run 2',
             'exit 3',
-            'run 3\n'
-        ].join('\n');
+            'run 3'
+        ];
 
         await instance.sendWaitAnswer('restartKillFirst', 'restarted');
 
-        assert(instance.output().endsWith(expected), 'Output should end with ' + expected);
+        assert(containInOrder(expected, instance.output()), `Output should contain ${expected} in this order`);
     });
 
     it('should remove self-restarted worker from queue', async () => {
