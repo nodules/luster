@@ -15,13 +15,35 @@ describe('Configuration', () => {
     let configuration;
     const sandbox = sinon.sandbox.create();
 
+    beforeEach(() => configuration = Object.assign({}, fixturesConf, true));
+
     afterEach(() => {
         sandbox.restore();
     });
 
-    describe('applyEnvironment', () => {
-        beforeEach(() => configuration = Object.assign({}, fixturesConf, true));
+    describe('constructor', () => {
+        it('should create instance from object', () => {
+            const instance = new Configuration(configuration);
 
+            assert.strictEqual(instance.get('app'), 'worker.js');
+            assert.strictEqual(instance.get('workers'), 10);
+            assert.strictEqual(instance.get('server.port'), 10080);
+            assert.strictEqual(instance.get('foo'), true);
+            assert.strictEqual(instance.get('baz.foo'), 'bar');
+        });
+
+        it('should create instance from Configuration instance', () => {
+            const instance = new Configuration(new Configuration(configuration));
+
+            assert.strictEqual(instance.get('app'), 'worker.js');
+            assert.strictEqual(instance.get('workers'), 10);
+            assert.strictEqual(instance.get('server.port'), 10080);
+            assert.strictEqual(instance.get('foo'), true);
+            assert.strictEqual(instance.get('baz.foo'), 'bar');
+        });
+    });
+
+    describe('applyEnvironment', () => {
         afterEach(() => delete process.env.LUSTER_CONF);
 
         it('should do simple one-level override', () => {
@@ -30,6 +52,15 @@ describe('Configuration', () => {
             Configuration.applyEnvironment(configuration);
 
             assert.strictEqual(configuration.workers, 1);
+        });
+
+        it('should do simple one-level override with Configuration instance', () => {
+            process.env.LUSTER_CONF = 'workers=1';
+
+            const instance = new Configuration(configuration);
+            Configuration.applyEnvironment(instance);
+
+            assert.strictEqual(instance.get('workers'), 1);
         });
 
         it('should override to undefined value via empty string', () => {
