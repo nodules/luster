@@ -36,6 +36,8 @@
     }
   ],
   "dependencies": {
+    "delay": "^3.0.0",
+    "p-event": "^2.1.0",
     "terror": "^1.0.0"
   },
   "devDependencies": {
