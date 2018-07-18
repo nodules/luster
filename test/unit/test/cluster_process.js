@@ -38,13 +38,14 @@ describe('ClusterProcess', () => {
             assert.calledOnce(spy);
         });
 
-        it('should emit "error" event for malformed config', () => {
+        it('should emit "error" event for malformed config', async () => {
             const spy = sandbox.spy();
 
             clusterProcess.on('error', spy);
             clusterProcess.configure({});
 
             assert.calledOnce(spy);
+            await assert.isRejected(clusterProcess.whenInitialized());
         });
 
         it('should not apply env config if overriding is explicitly turned off', () => {
