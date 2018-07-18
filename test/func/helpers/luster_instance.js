@@ -88,6 +88,8 @@ class LusterInstance {
         if (pipeStderr) {
             this._process.stderr.pipe(process.stderr, {end: false});
         }
+
+        this._exited = pEvent(this._process, 'exit');
     }
 
     /**
@@ -112,6 +114,14 @@ class LusterInstance {
         } else {
             throw new Error('First message from master should be "ready", got "' + message + '" instead');
         }
+    }
+
+    get exited() {
+        return this._exited;
+    }
+
+    send(message) {
+        this._process.send(message);
     }
 
     /**
