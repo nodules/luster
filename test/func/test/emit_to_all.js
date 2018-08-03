@@ -11,9 +11,9 @@ describe('emitToAll', () => {
             .run('../fixtures/emit_to_all/master.js');
     });
 
-    it('should deliver message data to all workers', done => {
+    it('should deliver message data to all workers and master', done => {
         setTimeout(() => {
-            assert.equal(instance.output(), 'test\ntest\n');
+            assert.equal(instance.output(), 'test\ntest\ntest\n');
             done();
         }, 100);
     });
