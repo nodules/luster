@@ -3,19 +3,18 @@
 
 const LusterInstance = require('../helpers/luster_instance');
 
-describe('emitToAll', () => {
+describe('shutdown event', () => {
     let instance;
 
     beforeEach(async () => {
         instance = await LusterInstance
-            .run('../fixtures/emit_to_all/master.js');
+            .run('../fixtures/double_shutdown/master.js');
     });
 
-    it('should deliver message data to all workers and master', done => {
-        setTimeout(() => {
-            assert.equal(instance.output(), 'test\ntest\ntest\n');
-            done();
-        }, 100);
+    it('should be emitted only once for shutdown method', async () => {
+        instance.send('shutdown');
+        await instance.exited;
+        assert.equal(instance.output(), 'shutdown\n');
     });
 
     afterEach(() => {

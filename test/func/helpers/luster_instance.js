@@ -63,6 +63,9 @@
 const fork = require('child_process').fork,
     path = require('path');
 
+const delay = require('delay');
+const pEvent = require('p-event');
+
 /**
  * A wrapper for `ChildProcess`
  * @class LusterInstance
@@ -85,6 +88,8 @@ class LusterInstance {
         if (pipeStderr) {
             this._process.stderr.pipe(process.stderr, {end: false});
         }
+
+        this._exited = pEvent(this._process, 'exit');
     }
 
     /**
@@ -94,7 +99,7 @@ class LusterInstance {
      * @param {boolean} [pipeStderr]
      * @returns {Promise}
      */
-    static run(name, env, pipeStderr) {
+    static async run(name, env, pipeStderr) {
         if (typeof(env) === 'boolean') {
             pipeStderr = env;
         }
@@ -103,15 +108,20 @@ class LusterInstance {
 
         // Promise is resolved when master process replies to ping
         // Promise is rejected if master was unable to reply to ping within 1 second
-        return new Promise((resolve, reject) => {
-            instance.once('message', message => {
-                if (message === 'ready') {
-                    resolve(res);
-                } else {
-                    reject(new Error('First message from master should be "ready", got "' + message + '" instead'));
-                }
-            });
-        });
+        const message = await pEvent(instance, 'message');
+        if (message === 'ready') {
+            return res;
+        } else {
+            throw new Error('First message from master should be "ready", got "' + message + '" instead');
+        }
+    }
+
+    get exited() {
+        return this._exited;
+    }
+
+    send(message) {
+        this._process.send(message);
     }
 
     /**
@@ -120,11 +130,9 @@ class LusterInstance {
      * @param {Number} timeout
      * @returns {Promise}
      */
-    sendWaitTimeout(message, timeout) {
-        return new Promise(resolve => {
-            this._process.send(message);
-            setTimeout(resolve, timeout);
-        });
+    async sendWaitTimeout(message, timeout) {
+        this._process.send(message);
+        await delay(timeout);
     }
 
     /**
@@ -134,17 +142,13 @@ class LusterInstance {
      * @param {String} expectedAnswer
      * @returns {Promise}
      */
-    sendWaitAnswer(message, expectedAnswer) {
-        return new Promise((resolve, reject) => {
-            this._process.send(message);
-            this._process.once('message', answer => {
-                if (answer === expectedAnswer) {
-                    resolve();
-                } else {
-                    reject('Expected master to send "' + expectedAnswer + '", got "' + answer + '" instead');
-                }
-            });
-        });
+    async sendWaitAnswer(message, expectedAnswer) {
+        const p = pEvent(this._process, 'message');
+        this._process.send(message);
+        const answer = await p;
+        if (answer !== expectedAnswer) {
+            throw new Error('Expected master to send "' + expectedAnswer + '", got "' + answer + '" instead');
+        }
     }
 
     /**
@@ -153,16 +157,11 @@ class LusterInstance {
      * @param {String} expectedAnswer
      * @returns {Promise}
      */
-    waitAnswer(expectedAnswer) {
-        return new Promise((resolve, reject) => {
-            this._process.once('message', answer => {
-                if (answer === expectedAnswer) {
-                    resolve();
-                } else {
-                    reject('Expected master to send "' + expectedAnswer + '", got "' + answer + '" instead');
-                }
-            });
-        });
+    async waitAnswer(expectedAnswer) {
+        const answer = await pEvent(this._process, 'message');
+        if (answer !== expectedAnswer) {
+            throw new Error('Expected master to send "' + expectedAnswer + '", got "' + answer + '" instead');
+        }
     }
 
     /**

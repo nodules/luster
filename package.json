@@ -1,6 +1,6 @@
 {
   "name": "luster",
-  "version": "2.0.1",
+  "version": "3.0.0-alpha.1",
   "description": "Node.js cluster wrapper",
   "main": "./lib/luster.js",
   "bin": {
@@ -36,10 +36,13 @@
     }
   ],
   "dependencies": {
+    "delay": "^3.0.0",
+    "p-event": "^2.1.0",
     "terror": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^4.19.1",
     "eslint-config-nodules": "^0.4.0",
     "istanbul": "^0.4.1",

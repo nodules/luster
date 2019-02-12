@@ -15,4 +15,7 @@ if (proc.isMaster) {
         process.send('ready');
         proc.emitToAll('log', 'test');
     });
+    proc.on('log', msg => {
+        console.log(msg);
+    });
 }
