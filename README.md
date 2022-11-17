@@ -112,8 +112,11 @@ module.exports = {
         port : 8080,
 
         // number of workers' groups; each group will
-        // have its own port number (port + group number)
-        groups : 2
+        // have its own port number (port + group number * ports per group..port + (group number + 1) * ports per group - 1)
+        groups : 2,
+
+        // number of ports per worker group; default 1
+        portsPerGroup: 2,
     },
 
     // extensions to load

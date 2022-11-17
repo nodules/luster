@@ -11,7 +11,7 @@
     },
 
     "server" : {
-        "port" : 10080,
+        "port" : 8080,
         "groups" : 3
     }
 }
