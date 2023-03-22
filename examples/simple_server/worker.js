@@ -1,9 +1,7 @@
 const http = require('http'),
     worker = require('luster');
 
-if (worker.wid === 1 || worker.wid === 0) {
-    console.log('try to open http://localhost:%s', process.env.port);
-}
+console.log('Worker #%s: try to open http://localhost:%s', worker.wid, process.env.port);
 
 http
     .createServer((req, res) => {
