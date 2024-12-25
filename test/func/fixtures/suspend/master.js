@@ -26,8 +26,8 @@ if (proc.isMaster) {
         case 'register suspend 200':
             proc.remoteCallToAll('register suspend', 200);
             break;
-        case 'register suspend 100000':
-            proc.remoteCallToAll('register suspend', 100000);
+        case 'register suspend 3000':
+            proc.remoteCallToAll('register suspend', 3000);
             break;
         case 'soft-restart':
             pEvent(proc, 'restarted').then(() => process.send('restarted'));
