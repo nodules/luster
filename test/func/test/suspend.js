@@ -14,7 +14,8 @@ describe('suspend before stop', () => {
     it('master calls suspend and waits for it to finish before stop', async () => {
         await instance.sendWaitTimeout('register suspend 100', 10);
         await instance.sendWaitAnswer('soft-restart', 'restarted');
-        const expected = `Waiting 100ms in suspend function
+        const expected = `Got ready
+Waiting 100ms in suspend function
 Finished waiting 100ms in suspend function
 Got disconnect
 `;
@@ -23,7 +24,7 @@ Got disconnect
 
     it('master disconnected worker if no suspend function was registered', async () => {
         await instance.sendWaitAnswer('soft-restart', 'restarted');
-        const expected = 'Got disconnect\n';
+        const expected = 'Got ready\nGot disconnect\n';
         assert.equal(instance.output(), expected);
     });
 
@@ -31,7 +32,8 @@ Got disconnect
         await instance.sendWaitTimeout('register suspend 100', 10);
         await instance.sendWaitTimeout('register suspend 200', 10);
         await instance.sendWaitAnswer('soft-restart', 'restarted');
-        const expected = `Waiting 100ms in suspend function
+        const expected = `Got ready
+Waiting 100ms in suspend function
 Waiting 200ms in suspend function
 Finished waiting 100ms in suspend function
 Finished waiting 200ms in suspend function
@@ -41,9 +43,26 @@ Got disconnect
     });
 
     it('master kills worker if suspend did not finish in stopTimeout', async () => {
-        await instance.sendWaitTimeout('register suspend 100000', 10);
+        await instance.sendWaitTimeout('register suspend 3000', 10);
         await instance.sendWaitAnswer('soft-restart', 'restarted');
-        const expected = 'Waiting 100000ms in suspend function\n';
+        const expected = 'Got ready\nWaiting 3000ms in suspend function\n';
+        assert.equal(instance.output(), expected);
+    });
+
+    it('master does not disconnect already killed worker', async function () {
+        // eslint-disable-next-line no-invalid-this
+        this.timeout(15000);
+
+        await instance.sendWaitTimeout('register suspend 3000', 10);
+        await instance.sendWaitAnswer('soft-restart', 'restarted');
+        // No "Got disconnect" is expected
+        const expected = `Got ready
+Waiting 3000ms in suspend function
+Got ready
+`;
+
+        await new Promise(resolve => setTimeout(resolve, 10000));
+
         assert.equal(instance.output(), expected);
     });
 
@@ -53,7 +72,8 @@ Got disconnect
         const exitCode = await instance.sendWaitExit('shutdown');
 
         // Keep those two 'shutting down' to make sure master process got our message and called 'shutdown' twice
-        const expected = `Shutting down
+        const expected = `Got ready
+Shutting down
 Shutting down
 Waiting 100ms in suspend function
 Finished waiting 100ms in suspend function

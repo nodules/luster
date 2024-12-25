@@ -15,3 +15,7 @@ worker.registerRemoteCommand('register suspend', (_, timeout) => {
 worker.on('disconnect', () => {
     console.log('Got disconnect');
 });
+
+worker.on('ready', () => {
+    console.log('Got ready');
+});
