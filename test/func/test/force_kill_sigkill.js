@@ -77,17 +77,6 @@ describe('stopTimeout and killTimeout', () => {
         });
     });
 
-    describe.only('SIGTERM and SIGKILL intercations', () => {
-        it('successful force stop with SIGTERM have to cancel following SIGKILL attempt if it configured', async () => {
-            instance = await LusterInstance
-                .run('../fixtures/force_kill_sigkill/master_sigterm_success.js', true);
-
-            await new Promise(resolve => setTimeout(resolve, 1500));
-
-            console.log(instance.output());
-        });
-    });
-
     afterEach(() => {
         if (instance) {
             instance.kill();
