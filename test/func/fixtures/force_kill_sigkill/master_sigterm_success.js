@@ -12,5 +12,9 @@ proc
     .run();
 
 if (proc.isMaster) {
-    proc.once('running', () => process.send('ready'));
+    proc.once('running', () => {
+        process.send('ready')
+        const worker = proc.getWorkersArray()[0];
+        worker.process.disconnect();
+    });
 }
