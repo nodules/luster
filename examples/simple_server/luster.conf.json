@@ -6,6 +6,7 @@
     "control" : {
         "forkTimeout" : 1000,
         "stopTimeout" : 1000,
+        "killTimeout" : 3000,
         "exitThreshold" : 3000,
         "allowedSequentialDeaths" : 3
     },

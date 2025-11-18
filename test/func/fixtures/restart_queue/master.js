@@ -24,6 +24,7 @@ function killFirstWorker() {
     firstWorker.on('state', state => {
         // force dead state
         if (state === WorkerWrapper.STATES.LAUNCHING) {
+            console.log('killing', firstWorker.wid);
             firstWorker.process.kill(9);
         }
 
