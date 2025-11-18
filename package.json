@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint ./lib ./test ./examples ./bin",
     "unit": "istanbul test _mocha -- test/unit/test",
-    "func": "mocha test/func/test $@",
+    "func": "mocha test/func/test/force_kill_sigkill $@",
     "test": "npm run lint && npm run unit && npm run func -- $@"
   },
   "repository": {

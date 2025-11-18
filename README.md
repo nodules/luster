@@ -76,9 +76,13 @@ module.exports = {
         // after spawning it (in milliseconds)
         forkTimeout : 3000,
 
-        // time to wait for 'exit' event from worker
+        // time to wait for 'exit' event from worker before trying to stop it with SIGTERM
         // after disconnecting it (in milliseconds)
         stopTimeout : 10000,
+
+        // time to wait for 'exit' event from worker before trying to stop it with SIGKILL
+        // after disconnecting it (in milliseconds)
+        killTimeout : 30000,
 
         // if worker dies in `exitThreshold` time (in milliseconds) after start,
         // then its' `sequentialDeaths` counter will be increased
